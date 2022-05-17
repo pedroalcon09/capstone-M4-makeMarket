@@ -990,13 +990,15 @@ email - optional, email
 
 ### 5.1 - OBJETO:
 
-| CAMPO      | TIPO   | DESCRIÇÃO                                     |
-| ---------- | ------ | --------------------------------------------- |
-| ID         | string | Id da relação, gerada pelo uuid               |
-| buyer_id   | string | Id do comprador q favoritou o produto         |
-| product_id | string | Id do prodcuto que vai ser favoritado         |
-| created_at | date   | Data da criação do produto                    |
-| status     | string | Status da transação, pode ser NOT PAID e PAID |
+| CAMPO      | TIPO    | DESCRIÇÃO                                     |
+| ---------- | ------- | --------------------------------------------- |
+| ID         | string  | Id da relação, gerada pelo uuid               |
+| buyer_id   | string  | Id do comprador q favoritou o produto         |
+| product_id | string  | Id do prodcuto que vai ser favoritado         |
+| created_at | date    | Data da criação do produto                    |
+| status     | string  | Status da transação, pode ser NOT PAID e PAID |
+| grade      | decimal | Nota do comprador para o produto              |
+| feedback   | string  | Breve avaliação do produto pelo comprador     |
 
 ### 5.2 - ENDPOINTS:
 
