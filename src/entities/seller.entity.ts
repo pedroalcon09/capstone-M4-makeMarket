@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
+import { Product } from "./product.entity";
 import { v4 as uuid } from "uuid";
 
 @Entity()
@@ -26,6 +27,9 @@ export class Seller {
 
   @Column()
   updated_at: Date;
+
+  @OneToMany(() => Product, (product) => product.user)
+  products: Product[];
 
   constructor() {
     if (!this.id) {
