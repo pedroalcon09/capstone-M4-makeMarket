@@ -993,8 +993,8 @@ email - optional, email
 | CAMPO      | TIPO    | DESCRIÇÃO                                     |
 | ---------- | ------- | --------------------------------------------- |
 | ID         | string  | Id da relação, gerada pelo uuid               |
-| buyer_id   | string  | Id do comprador q favoritou o produto         |
-| product_id | string  | Id do prodcuto que vai ser favoritado         |
+| buyer_id   | string  | Id do comprador                               |
+| product_id | string  | Id do producto que vai ser comprado           |
 | created_at | date    | Data da criação do produto                    |
 | status     | string  | Status da transação, pode ser NOT PAID e PAID |
 | grade      | decimal | Nota do comprador para o produto              |
@@ -1040,7 +1040,7 @@ email - optional, email
             "created_at": "December 17, 2019 03:24:00",
             "status": "NOT PAID",
             "grade" : undefined,
-            "feedback": ""
+            "feedback": undefined
         },
     }
 
