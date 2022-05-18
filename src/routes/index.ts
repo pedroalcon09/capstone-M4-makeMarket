@@ -6,7 +6,7 @@ routes.use('/seller');
 routes.use('/buyer');
 routes.use('/products');
 routes.use('/categories');
-routes.use('/favorites');
+routes.use('/favourites');
 routes.use('/buy');
 
 export default routes;
