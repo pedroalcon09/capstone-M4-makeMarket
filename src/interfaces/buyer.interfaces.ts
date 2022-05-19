@@ -2,7 +2,7 @@ export interface IBuyer {
   id: string;
   name: string;
   email: string;
-  pasword: string;
+  password: string;
   created_at: Date;
   updated_at: Date;
 }
@@ -10,5 +10,11 @@ export interface IBuyer {
 export interface IBuyerCreate {
   name: string;
   email: string;
-  pasword: string;
+  password: string;
+}
+
+export interface IBuyerUpdate {
+  name?: string;
+  email?: string;
+  password?: string;
 }

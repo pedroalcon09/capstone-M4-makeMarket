@@ -2,18 +2,16 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Buyer } from "../../entities/buyer.entity";
 
-async function listBuyerByIdService(id: string) {
+async function listBuyersService() {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
   const buyers = await buyerRepository.find();
 
-  const buyer = buyers.find((elem) => elem.id === id);
-
-  if (!buyer) {
-    throw new AppError(404, "No user with this id");
+  if (buyers.length === 0) {
+    throw new AppError(404, "No buyers registered");
   }
 
-  return buyer;
+  return buyers;
 }
 
-export default listBuyerByIdService;
+export default listBuyersService;
