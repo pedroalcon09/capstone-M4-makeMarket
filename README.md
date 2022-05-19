@@ -70,10 +70,49 @@ Projeto de final do módulo 4 do curso Full-Stack da Kenzie Academy Brasil
 | Método | Rota              | Descrição                          |
 | ------ | ----------------- | ---------------------------------- |
 | POST   | /seller           | Cadastro de um novo vendedor       |
+| POST   | /seller/login     | Login de um vendedor               |
 | GET    | /seller           | Listagem de todos os vendedores    |
 | GET    | /seller/:sellerId | Listagem de um vendedor específico |
 | PATCH  | /seller/:sellerId | Atualização de dados do vendedor   |
 | DELETE | /seller/:sellerId | Deletar perfil do vendedor         |
+
+#### LOGIN DE VENDEDOR
+
+> Rota:
+
+    /seller/login
+
+> Exemplo de request:
+
+    POST /seller/login
+    Content-type: application/json
+
+> Corpo da requisição:
+
+    {
+        "email": "johnDoe@email.com",
+        "password": "Aa12@abc",
+    }
+
+> Schema de validação do yup:
+
+- email - email;
+- password - maior q 8, numero, caracter especial, maiuscula e minuscula;
+
+> Exemplo de response:
+
+    {
+        "status": 201,
+        "message": "Logged in!",
+        "token": "token_string"
+    }
+
+> Possiveis erros:
+
+| CÓDIGO DO ERRO | DESCRIÇÃO                             |
+| -------------- | ------------------------------------- |
+| 404            | "No seller with this email was found" |
+| 401            | "Wrong email or password"             |
 
 #### CRIAÇÃO DE VENDEDOR
 
@@ -322,10 +361,49 @@ email - optional, email
 | Método | Rota            | Descrição                           |
 | ------ | --------------- | ----------------------------------- |
 | POST   | /buyer          | Cadastro de um novo comprador       |
+| POST   | /buyer/login    | Login de um comprador               |
 | GET    | /buyer          | Listagem de todos os compradores    |
 | GET    | /buyer/:buyerId | Listagem de um comprador específico |
 | PATCH  | /buyer/:buyerId | Atualização de dados do comprador   |
 | DELETE | /buyer/:buyerId | Deletar perfil do comprador         |
+
+#### LOGIN DE COMPRADOR
+
+> Rota:
+
+    /buyer/login
+
+> Exemplo de request:
+
+    POST /buyer/login
+    Content-type: application/json
+
+> Corpo da requisição:
+
+    {
+        "email": "michael_scott@email.com",
+        "password": "Aa12@abc",
+    }
+
+> Schema de validação do yup:
+
+- name - string, length > 0;
+- email - email;
+
+> Exemplo de response:
+
+    {
+        "status": 201,
+        "message": "Logged in!",
+        "token": "token_string"
+    }
+
+> Possiveis erros:
+
+| CÓDIGO DO ERRO | DESCRIÇÃO                            |
+| -------------- | ------------------------------------ |
+| 404            | "No buyer with this email was found" |
+| 401            | "Wrong email or password"            |
 
 #### CRIAÇÃO DE COMPRADOR
 
