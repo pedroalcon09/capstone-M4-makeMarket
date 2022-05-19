@@ -1,5 +1,5 @@
 {
-  "name": "capstone-M4-makeMarket",
+  "name": "capstone-m4-makemarket",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:pedroalcon09/capstone-M4-makeMarket.git",
@@ -20,7 +20,9 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc",
+    "start" : "node dist/app.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
