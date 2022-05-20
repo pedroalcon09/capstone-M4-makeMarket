@@ -1,4 +1,4 @@
-export interface buyerLogin {
+export interface IBuyerLogin {
   email: string;
   pasword: string;
 }
