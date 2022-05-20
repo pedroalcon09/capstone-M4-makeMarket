@@ -21,6 +21,7 @@ export interface ISellerCreate {
 }
 
 export interface ISellerUpdate {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }
