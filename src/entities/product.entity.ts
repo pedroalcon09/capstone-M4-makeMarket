@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, ManyToOne } from "typeorm";
+import { Seller } from "./seller.entity";
 import { v4 as uuid } from "uuid";
 
 @Entity()
@@ -26,6 +27,9 @@ export class Product {
 
   @Column()
   updated_at: Date;
+
+  @ManyToOne(() => Seller, (seller) => seller.products)
+  seller: Seller;
 
   constructor() {
     if (!this.id) {
