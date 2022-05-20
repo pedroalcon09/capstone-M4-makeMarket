@@ -3,8 +3,12 @@ import jwt from "jsonwebtoken";
 import { AppDataSource } from "../../data-source";
 import { Buyer } from "../../entities/buyer.entity";
 import { AppError } from "../../errors/appError";
+import { IBuyerLogin } from "../../interfaces";
 
-async function buyerLoginService(email: string, password: string) {
+async function buyerLoginService({
+  email: string,
+  password: string,
+}: IBuyerLogin) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
   const buyers = await buyerRepository.find();
