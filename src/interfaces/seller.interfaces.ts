@@ -1,6 +1,6 @@
 export interface ISellerLogin {
   email: string;
-  pasword: string;
+  password: string;
 }
 
 export interface ISeller {
