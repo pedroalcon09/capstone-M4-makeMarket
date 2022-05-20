@@ -5,10 +5,7 @@ import { Buyer } from "../../entities/buyer.entity";
 import { AppError } from "../../errors/appError";
 import { IBuyerLogin } from "../../interfaces";
 
-async function buyerLoginService({
-  email: string,
-  password: string,
-}: IBuyerLogin) {
+async function buyerLoginService({ email, password }: IBuyerLogin) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
   const buyers = await buyerRepository.find();

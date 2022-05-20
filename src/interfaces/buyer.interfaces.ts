@@ -1,6 +1,6 @@
 export interface IBuyerLogin {
   email: string;
-  pasword: string;
+  password: string;
 }
 
 export interface IBuyer {
@@ -16,12 +16,6 @@ export interface IBuyerCreate {
   name: string;
   email: string;
   password: string;
-}
-
-export interface IBuyerUpdate {
-  name?: string;
-  email?: string;
-  password?: string;
 }
 
 export interface IBuyerUpdate {
