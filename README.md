@@ -1231,18 +1231,21 @@ email - optional, email
 
 ### 6.1 - OBJETO:
 
-| CAMPO      | TIPO   | DESCRIÇÃO                     |
-| ---------- | ------ | ----------------------------- |
-| ID         | string | Id da categoria               |
-| name       | string | Nome da categoria             |
-| created_at | string | Data que categoria foi criada |
+| CAMPO      | TIPO   | DESCRIÇÃO                         |
+| ---------- | ------ | --------------------------------- |
+| ID         | string | Id da categoria                   |
+| name       | string | Nome da categoria                 |
+| created_at | string | Data que categoria foi criada     |
+| updated_at | string | Data que categoria foi atualizada |
 
 ### 6.2 - ENDPOINTS:
 
-| Método | Rota                    | Descrição             |
-| ------ | ----------------------- | --------------------- |
-| POST   | /categories/new         | Criar nova categoria  |
-| DELETE | /categories/:categoryId | Deletar uma categoria |
+| Método | Rota                    | Descrição                  |
+| ------ | ----------------------- | -------------------------- |
+| POST   | /categories/new         | Criar nova categoria       |
+| GET    | /categories             | Listar todas as categorias |
+| PATCH  | /categories/:categoryId | Atualizar uma categoria    |
+| DELETE | /categories/:categoryId | Deletar uma categoria      |
 
 #### CRIANDO NOVA CATEGORIA
 
@@ -1274,7 +1277,8 @@ email - optional, email
         "category" : {
             "id": "36382igbfj-27ghenf-2738igbdjs",
             "name": "Laticinios",
-            "created_at": "December 17, 2019 03:24:00"
+            "created_at": "December 17, 2019 03:24:00",
+            "updated_at": "December 17, 2019 03:24:00"
         }
     }
 
@@ -1329,6 +1333,50 @@ email - optional, email
 | -------------- | ------------------------ |
 | 404            | "No categories created"  |
 | 403            | "Wrong or invalid token" |
+
+#### ATUALIZANDO UMA CATEGORIAS
+
+> Rota:
+
+    /categories/:categoryId
+
+> Exemplo de request:
+
+    PATCH /categories/36382igbfj-27ghenf-2738igbdjs
+    Content-type: application/json
+    Authorization: token
+
+> Corpo da requisição:
+
+    {
+        "name": "Laticinios ATUALIZADO",
+    }
+
+> Schema de validação do yup:
+
+    name -> obrigatorio, string, diferente do ultimo nome
+
+> Exemplo de response:
+
+    {
+        "status": 200,
+        "message": "Category updated",
+        "categories" :
+                {
+            "id": "36382igbfj-27ghenf-2738igbdjs",
+            "name": "Laticinios",
+            "created_at": "December 17, 2019 03:24:00",
+            "updated_at": "May 20, 2022, 13:29:13"
+        }
+    }
+
+> Possiveis erros:
+
+| CÓDIGO DO ERRO | DESCRIÇÃO                                      |
+| -------------- | ---------------------------------------------- |
+| 404            | "No categories created"                        |
+| 403            | "Wrong or invalid token"                       |
+| 403            | "Name must be different from the previous one" |
 
 #### DELETANDO NOVA CATEGORIA
 
