@@ -1,3 +1,8 @@
+export interface ISellerLogin {
+  email: string;
+  pasword: string;
+}
+
 export interface ISeller {
   id: string;
   name: string;
@@ -16,6 +21,7 @@ export interface ISellerCreate {
 }
 
 export interface ISellerUpdate {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }
