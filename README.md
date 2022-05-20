@@ -307,13 +307,14 @@ email - optional, email
 
 > Possiveis erros:
 
-| CÓDIGO DO ERRO | DESCRIÇÃO                     |
-| -------------- | ----------------------------- |
-| 403            | "No authorization header"     |
-| 403            | "Wrong or invalid token       |
-| 404            | "No user with this ID"        |
-| 400            | "Body request empty"          |
-| 403            | "You can only update yourself |
+| CÓDIGO DO ERRO | DESCRIÇÃO                                                 |
+| -------------- | --------------------------------------------------------- |
+| 403            | "No authorization header"                                 |
+| 403            | "Wrong or invalid token                                   |
+| 404            | "No user with this ID"                                    |
+| 400            | "Body request empty"                                      |
+| 403            | "You can only update yourself                             |
+| 409            | "The new password must be different from the current one" |
 
 #### REMOÇÃO DE UM VENDEDOR
 
@@ -585,13 +586,14 @@ email - optional, email
 
 > Possiveis erros:
 
-| CÓDIGO DO ERRO | DESCRIÇÃO                     |
-| -------------- | ----------------------------- |
-| 403            | "No authorization header"     |
-| 403            | "Wrong or invalid token       |
-| 404            | "No user with this ID"        |
-| 400            | "Body request empty"          |
-| 403            | "You can only update yourself |
+| CÓDIGO DO ERRO | DESCRIÇÃO                                                 |
+| -------------- | --------------------------------------------------------- |
+| 403            | "No authorization header"                                 |
+| 403            | "Wrong or invalid token                                   |
+| 404            | "No user with this ID"                                    |
+| 400            | "Body request empty"                                      |
+| 403            | "You can only update yourself                             |
+| 409            | "The new password must be different from the current one" |
 
 #### REMOÇÃO DE UM COMPRADOR
 
