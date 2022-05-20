@@ -1,3 +1,8 @@
+export interface ISellerLogin {
+  email: string;
+  pasword: string;
+}
+
 export interface ISeller {
   id: string;
   name: string;
