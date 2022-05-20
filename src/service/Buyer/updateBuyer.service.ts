@@ -7,6 +7,10 @@ import { Buyer } from "../../entities/buyer.entity";
 async function updateBuyerService(id: string, updateData: IBuyerUpdate) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
+  if (updateData === undefined) {
+    throw new AppError(400, "Body request empty");
+  }
+
   const buyers = await buyerRepository.find();
 
   const buyerUpdate = buyers.find((buyer) => buyer.id === id);
@@ -24,20 +28,30 @@ async function updateBuyerService(id: string, updateData: IBuyerUpdate) {
         "Password must be different from the current one"
       );
     }
+
+    const updatedBuyer = { ...buyerUpdate, ...updateData };
+
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+    await buyerRepository.update(updatedBuyer!.id, {
+      name: updatedBuyer.name,
+      email: updatedBuyer.email,
+      password: hashedPassword,
+      updated_at: new Date(),
+    });
+
+    return updatedBuyer;
   }
 
   const updatedBuyer = { ...buyerUpdate, ...updateData };
 
-  const hashedPassword = bcrypt.hashSync(newPassword, 10);
-
   await buyerRepository.update(updatedBuyer!.id, {
     name: updatedBuyer.name,
     email: updatedBuyer.email,
-    password: hashedPassword,
     updated_at: new Date(),
   });
 
-  return true;
+  return updatedBuyer;
 }
 
 export default updateBuyerService;
