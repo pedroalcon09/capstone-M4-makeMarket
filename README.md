@@ -12,6 +12,10 @@ Projeto de final do módulo 4 do curso Full-Stack da Kenzie Academy Brasil
 
 > @types/node
 
+> @types/jsonwebtoken
+
+> @types/bcrypt
+
 ## Dependências -d:
 
 > express
@@ -25,6 +29,10 @@ Projeto de final do módulo 4 do curso Full-Stack da Kenzie Academy Brasil
 > dotenv
 
 > express-async-errors
+
+> bcrypt
+
+> jsonwebtoken
 
 ## Dependencias de teste -D:
 
