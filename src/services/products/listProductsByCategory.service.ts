@@ -12,7 +12,7 @@ const listProductsService = async (category_id: string) => {
   );
 
   if (!productByCategory) {
-    throw new AppError(404, "No products in this category");
+    throw new AppError(404, "No category with this ID");
   }
 
   return productByCategory;
