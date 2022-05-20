@@ -1,6 +1,5 @@
-import IProductsCreate from "../../interfaces/index.ts";
+import { IProductsCreate } from "../../interfaces/index.ts";
 import { AppDataSource } from "../../data-source";
-import { AppError } from "../../errors/appError";
 import { Product } from "../../entities/product.entity";
 
 const createProductService = async ({
