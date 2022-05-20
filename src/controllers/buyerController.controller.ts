@@ -14,9 +14,12 @@ export default class BuyerController {
     try {
       const { email, password } = req.body;
 
-      const token = buyerLoginService(email, password);
+      const buyerLogin: IBuyerLogin = { email, password };
+
+      const token = await buyerLoginService(buyerLogin);
 
       return res.status(201).json({
+        status: 201,
         message: "Logged in!",
         token,
       });
@@ -28,6 +31,17 @@ export default class BuyerController {
   }
   static async create(req: Request, res: Response) {
     try {
+      const { name, email, password } = req.body;
+
+      const newBuyer = { name, email, password };
+
+      const buyer = await createBuyerService(newBuyer);
+
+      return res.status(201).json({
+        status: 201,
+        message: "Buyer created!",
+        buyer: newBuyer,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -37,6 +51,12 @@ export default class BuyerController {
 
   static async listAll(req: Request, res: Response) {
     try {
+      const buyers = await listBuyersService();
+
+      return res.status(200).json({
+        status: 200,
+        buyers: buyers,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -45,6 +65,13 @@ export default class BuyerController {
   }
   static async listById(req: Request, res: Response) {
     try {
+      const { buyerId } = req.params;
+      const buyer = await listBuyerByIdService(buyerId);
+
+      return res.status(200).json({
+        status: 200,
+        buyers: buyer,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -53,6 +80,15 @@ export default class BuyerController {
   }
   static async update(req: Request, res: Response) {
     try {
+      const{buyerId} = req.body;
+
+      const updatedBuyer = await updateBuyerService(buyerId, req.body);
+
+      return res.status(200).json({
+        status:200,
+        message: "Buyer updated!"
+        buyer: updatedBuyer
+      })
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -61,6 +97,14 @@ export default class BuyerController {
   }
   static async delete(req: Request, res: Response) {
     try {
+      const {buyerId} = req.params;
+
+      const deleteBuyer = await deleteBuyerService(buyerId);
+
+      res.status(200).json({
+        status:200,
+        message: "Buyer deleted successfully"
+      })
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
