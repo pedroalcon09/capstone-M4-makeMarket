@@ -28,7 +28,7 @@ export class Seller {
   @Column()
   updated_at: Date;
 
-  @OneToMany(() => Product, (product) => product.user)
+  @OneToMany(() => Product, (product) => product.seller)
   products: Product[];
 
   constructor() {
