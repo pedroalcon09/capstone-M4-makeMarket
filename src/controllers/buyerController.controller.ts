@@ -31,16 +31,12 @@ export default class BuyerController {
   }
   static async create(req: Request, res: Response) {
     try {
-      const { name, email, password } = req.body;
-
-      const newBuyer = { name, email, password };
-
-      const buyer = await createBuyerService(newBuyer);
+      const buyer = await createBuyerService(req.newBuyer);
 
       return res.status(201).json({
         status: 201,
         message: "Buyer created!",
-        buyer: newBuyer,
+        buyer: buyer,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -80,9 +76,9 @@ export default class BuyerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { buyerId } = req.body;
+      const { buyerId } = req.params;
 
-      const updatedBuyer = await updateBuyerService(buyerId, req.body);
+      const updatedBuyer = await updateBuyerService(buyerId, req.updateBuyer);
 
       return res.status(200).json({
         status: 200,
