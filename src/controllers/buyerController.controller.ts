@@ -12,11 +12,7 @@ import { IBuyerLogin } from "../interfaces";
 export default class BuyerController {
   static async login(req: Request, res: Response) {
     try {
-      const { email, password } = req.body;
-
-      const buyerLogin: IBuyerLogin = { email, password };
-
-      const token = await buyerLoginService(buyerLogin);
+      const token = await buyerLoginService(req.loginBuyer);
 
       return res.status(201).json({
         status: 201,
