@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 import createProductService from "../../services/products/createProduct.service.ts";
+import listProductsService from "../../services/products/listAllProducts.service.ts";
+import listProductsByCategoryService from "../../services/products/listProductsByCategory.service.ts";
+import deleteProductService from "../../services/products/deleteProduct.service.ts";
+import updateProductService from "../../services/products/updateProduct.service.ts";
 
 export default class ProductsController {
   static async create(req: Request, res: Response) {
@@ -26,24 +30,15 @@ export default class ProductsController {
       }
     }
   }
-  static async favorite(req: Request, res: Response) {
-    try {
-    } catch (err) {
-      if (err instanceof AppError) {
-        handleError(err, res);
-      }
-    }
-  }
-  static async buy(req: Request, res: Response) {
-    try {
-    } catch (err) {
-      if (err instanceof AppError) {
-        handleError(err, res);
-      }
-    }
-  }
+
   static async listAll(req: Request, res: Response) {
     try {
+      const products = await listProductsService();
+
+      return res.status(200).json({
+        status: 200,
+        products: products,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -52,6 +47,16 @@ export default class ProductsController {
   }
   static async listByCategory(req: Request, res: Response) {
     try {
+      const { categoryId } = req.params;
+
+      const productsByCategory = await listProductsByCategoryService(
+        categoryId
+      );
+
+      return res.status(200).json({
+        status: 200,
+        products: productsByCategory,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -60,6 +65,15 @@ export default class ProductsController {
   }
   static async update(req: Request, res: Response) {
     try {
+      const { product_id } = req.params;
+
+      const updatedProduct = await updateProductService(product_id, req.body);
+
+      return res.status(200).json({
+        status: 200,
+        message: "Product updated!",
+        buyer: updatedProduct,
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
@@ -68,6 +82,14 @@ export default class ProductsController {
   }
   static async delete(req: Request, res: Response) {
     try {
+      const { product_id } = req.params;
+
+      const deleteProduct = await deleteProductService(product_id);
+
+      res.status(200).json({
+        status: 200,
+        message: "Product deleted successfully",
+      });
     } catch (err) {
       if (err instanceof AppError) {
         handleError(err, res);
