@@ -6,6 +6,7 @@ import * as yup from "yup";
 //Importar a type de Schemas
 import { SchemaOf } from "yup";
 
+//Esse regex é pra força da senha, tem estar typado assim, se n não funciona
 const pwdRegex: RegExp = /(?=.*[!@#$&*])(?=.*[0-9])(?=.{6,})/g;
 
 //Criar o schema com ShcemaOf e a Interface do schema

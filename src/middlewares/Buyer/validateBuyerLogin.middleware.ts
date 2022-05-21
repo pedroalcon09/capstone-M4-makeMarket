@@ -1,4 +1,4 @@
-import { IBuyerCreate } from "../../interfaces";
+import { IBuyerLogin } from "../../interfaces";
 import { Request, Response, NextFunction } from "express";
 
 import * as yup from "yup";
@@ -6,24 +6,14 @@ import * as yup from "yup";
 //Importar a type de Schemas
 import { SchemaOf } from "yup";
 
-//Esse regex é pra força da senha, tem estar typado assim, se n não funciona
-const pwdRegex: RegExp = /(?=.*[!@#$&*])(?=.*[0-9])(?=.{6,})/g;
-
 //Criar o schema com ShcemaOf e a Interface do schema
-export const buyerCreateSchema: SchemaOf<IBuyerCreate> = yup.object().shape({
-  name: yup.string().required("Name needed!"),
+export const buyerLoginSchema: SchemaOf<IBuyerLogin> = yup.object().shape({
   email: yup.string().email("Wrong email format").required("Email needed"),
-  password: yup
-    .string()
-    .required("Password needed")
-    .matches(
-      pwdRegex,
-      "Password must be 6 char long, with number and special char(!,@,#,$,&,*)"
-    ),
+  password: yup.string().required("Password needed"),
 });
 
 //Criar função pra fazer a validação
-export const validateBuyerCreate = (schema: SchemaOf<IBuyerCreate>) => {
+export const validateBuyerLogin = (schema: SchemaOf<IBuyerLogin>) => {
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
@@ -33,7 +23,7 @@ export const validateBuyerCreate = (schema: SchemaOf<IBuyerCreate>) => {
           abortEarly: false,
           stripUnknown: true,
         });
-        req.newBuyer = validateData;
+        req.loginBuyer = validateData;
 
         next();
       } catch (err: any) {
