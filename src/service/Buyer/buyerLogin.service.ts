@@ -16,13 +16,17 @@ async function buyerLoginService({ email, password }: IBuyerLogin) {
     throw new AppError(404, "No buyer with this email was found");
   }
 
-  if (bcrypt.compareSync(password, buyer.password)) {
+  if (!bcrypt.compareSync(password, buyer.password)) {
     throw new AppError(401, "Wrong email or password");
   }
 
-  const token = jwt.sign({ email: email }, String(process.env.JWT_SECRET), {
-    expiresIn: "24h",
-  });
+  const token = jwt.sign(
+    { email: email, id: buyer.id },
+    String(process.env.JWT_SECRET),
+    {
+      expiresIn: "24h",
+    }
+  );
 
   return token;
 }

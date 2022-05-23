@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  OneToMany,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+} from "typeorm";
+import * as bcrypt from "bcrypt";
 import { Product } from "./product.entity";
 import { v4 as uuid } from "uuid";
 
@@ -22,14 +32,19 @@ export class Seller {
   @Column()
   grade: number;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
   @OneToMany(() => Product, (product) => product.seller)
   products: Product[];
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 10);
+  }
 
   constructor() {
     if (!this.id) {

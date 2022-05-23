@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import { Buys } from "./buys.entities";
 import { Seller } from "./seller.entity";
 import { v4 as uuid } from "uuid";
 
@@ -22,14 +32,20 @@ export class Product {
   @Column()
   url_image: string;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
   @ManyToOne(() => Seller, (seller) => seller.products)
   seller: Seller;
+
+  @ManyToMany(() => Buys, {
+    eager: true,
+  })
+  @JoinTable()
+  buys: Buys[];
 
   constructor() {
     if (!this.id) {

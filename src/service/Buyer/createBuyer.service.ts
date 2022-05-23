@@ -6,7 +6,6 @@ import bcrypt from "bcrypt";
 
 async function createBuyerService({ name, email, password }: IBuyerCreate) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
-
   const buyers = await buyerRepository.find();
 
   const emailRegistered = buyers.find((buyer) => buyer.email === email);
@@ -15,15 +14,14 @@ async function createBuyerService({ name, email, password }: IBuyerCreate) {
     throw new AppError(409, "Email already registered");
   }
 
-  const buyer = new Buyer();
-  buyer.name = name;
-  buyer.email = email;
-  buyer.password = bcrypt.hashSync(password, 10);
+  const newBuyer = buyerRepository.create({
+    name,
+    email,
+    password,
+  });
 
-  buyerRepository.create(buyer);
-  await buyerRepository.save(buyer);
-
-  return buyer;
+  await buyerRepository.save(newBuyer);
+  return newBuyer;
 }
 
 export default createBuyerService;
