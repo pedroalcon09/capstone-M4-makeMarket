@@ -9,8 +9,8 @@ const buyerRoutes = Router();
 buyerRoutes.post("/", BuyerController.create); // -- OK
 buyerRoutes.post("/login", BuyerController.login); // -- OK
 buyerRoutes.get("/", BuyerController.listAll); // -- OK
-buyerRoutes.get("/:buyerId", authCheck, BuyerController.listById); // -- OK
-buyerRoutes.patch("/:buyerId", authCheck, BuyerController.update); // -- OK
-buyerRoutes.delete("/:buyerId", authCheck, BuyerController.delete); // -- OK
+buyerRoutes.get("/:buyerID", authCheck, BuyerController.listById); // -- OK
+buyerRoutes.patch("/:buyerID", authCheck, BuyerController.update); // -- OK
+buyerRoutes.delete("/:buyerID", authCheck, BuyerController.delete); // -- OK
 
 export default buyerRoutes;

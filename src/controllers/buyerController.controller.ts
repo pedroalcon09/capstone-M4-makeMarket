@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 
-import buyerLoginService from "../service/Buyer/buyerLogin.service";
-import createBuyerService from "../service/Buyer/createBuyer.service";
-import listBuyersService from "../service/Buyer/listBuyers.service";
-import listBuyerByIdService from "../service/Buyer/listBuyerById.service";
-import updateBuyerService from "../service/Buyer/updateBuyer.service";
-import deleteBuyerService from "../service/Buyer/deleteBuyer.service";
+import buyerLoginService from "../services/Buyer/buyerLogin.service";
+import createBuyerService from "../services/Buyer/createBuyer.service";
+import listBuyersService from "../services/Buyer/listBuyers.service";
+import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
+import updateBuyerService from "../services/Buyer/updateBuyer.service";
+import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
 import { IBuyerLogin } from "../interfaces";
 
 export default class BuyerController {
@@ -65,8 +65,8 @@ export default class BuyerController {
   }
   static async listById(req: Request, res: Response) {
     try {
-      const { buyerId } = req.params;
-      const buyer = await listBuyerByIdService(buyerId);
+      const { buyerID } = req.params;
+      const buyer = await listBuyerByIdService(buyerID);
 
       return res.status(200).json({
         status: 200,
@@ -80,9 +80,9 @@ export default class BuyerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { buyerId } = req.params;
+      const { buyerID } = req.params;
 
-      const updatedBuyer = await updateBuyerService(buyerId, req.body);
+      const updatedBuyer = await updateBuyerService(buyerID, req.body);
 
       return res.status(200).json({
         status: 200,
@@ -97,9 +97,9 @@ export default class BuyerController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { buyerId } = req.params;
+      const { buyerID } = req.params;
 
-      const deleteBuyer = await deleteBuyerService(buyerId);
+      const deleteBuyer = await deleteBuyerService(buyerID);
 
       res.status(200).json({
         status: 200,
