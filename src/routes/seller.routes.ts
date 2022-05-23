@@ -4,8 +4,8 @@ const sellerRouter = Router();
 
 sellerRouter.post('/');
 sellerRouter.get('/');
-sellerRouter.get('/:sellerID');
-sellerRouter.patch('/:sellerID');
-sellerRouter.delete('/:sellerID');
+sellerRouter.get('/:sellerId');
+sellerRouter.patch('/:sellerId');
+sellerRouter.delete('/:sellerId');
 
 export default sellerRouter;
