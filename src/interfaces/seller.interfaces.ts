@@ -1,8 +1,13 @@
+export interface ISellerLogin {
+  email: string;
+  password: string;
+}
+
 export interface ISeller {
   id: string;
   name: string;
   email: string;
-  pasword: string;
+  password: string;
   totalSales: number;
   grade: number;
   created_at: Date;
@@ -12,10 +17,11 @@ export interface ISeller {
 export interface ISellerCreate {
   name: string;
   email: string;
-  pasword: string;
+  password: string;
 }
 
 export interface ISellerUpdate {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }
