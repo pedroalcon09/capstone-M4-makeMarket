@@ -1,4 +1,4 @@
-import { IProductsCreate } from "../../interfaces/index.ts";
+import { IProductsCreate } from "../../interfaces/index";
 import { AppDataSource } from "../../data-source";
 import { Product } from "../../entities/product.entity";
 
@@ -9,6 +9,7 @@ const createProductService = async ({
   stock,
   url_img,
   category_id,
+  seller_id,
 }: IProductsCreate) => {
   const productRepository = AppDataSource.getRepository(Product);
 
@@ -17,8 +18,9 @@ const createProductService = async ({
   product.price = price;
   product.description = description;
   product.stock = stock;
-  product.url_img = url_img;
+  product.url_image = url_img;
   product.category_id = category_id;
+  product.seller_id = seller_id;
 
   productRepository.create(product);
   await productRepository.save(product);

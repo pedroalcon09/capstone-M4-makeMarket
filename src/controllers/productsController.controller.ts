@@ -20,7 +20,7 @@ export default class ProductsController {
         stock,
         url_img,
         category_id,
-        sellerId,
+        seller_id: sellerId,
       });
 
       return res.status(201).json({ newProduct });

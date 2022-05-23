@@ -8,7 +8,7 @@ const listProductsService = async (category_id: string) => {
   const products = await productRepository.find();
 
   const productByCategory = products.find(
-    (product) => product.category_id === category_id
+    (product) => product.id === category_id
   );
 
   if (!productByCategory) {

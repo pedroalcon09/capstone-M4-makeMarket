@@ -1,4 +1,4 @@
-import { IProductsUpdate } from "../../interfaces/index.ts";
+import { IProductsUpdate } from "../../interfaces/index";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Product } from "../../entities/product.entity";
@@ -12,7 +12,7 @@ const updateProductService = async (
   const products = await productRepository.find();
 
   const productToBeUpdated = products.find(
-    (product) => product.product_id === product_id
+    (product) => product.id === product_id
   );
 
   if (!productToBeUpdated) {

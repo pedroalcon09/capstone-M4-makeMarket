@@ -32,14 +32,17 @@ export class Product {
   @Column()
   url_image: string;
 
+  @Column()
+  category_id: string;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Seller, (seller) => seller.products)
-  seller: Seller;
+  @ManyToOne(() => Seller, (seller) => seller.id)
+  seller_id: string;
 
   @ManyToMany(() => Buys, {
     eager: true,

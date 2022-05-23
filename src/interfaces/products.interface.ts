@@ -18,6 +18,7 @@ export interface IProductsCreate {
   stock: number;
   url_img: string;
   category_id: string;
+  seller_id: string;
 }
 
 export interface IProductsCreate {
