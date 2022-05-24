@@ -7,9 +7,9 @@ import { Buyer } from "../../entities/buyer.entity";
 async function updateBuyerService(id: string, updateData: IBuyerUpdate) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
-  if (updateData === undefined) {
+  /* if (updateData === "") {
     throw new AppError(400, "Body request empty");
-  }
+  } */
 
   const buyers = await buyerRepository.find();
 
@@ -22,7 +22,7 @@ async function updateBuyerService(id: string, updateData: IBuyerUpdate) {
   const newPassword = updateData.password;
 
   if (newPassword) {
-    if (bcrypt.compareSync(newPassword, buyerUpdate!.password)) {
+    if (bcrypt.compareSync(newPassword, buyerUpdate.password)) {
       throw new AppError(
         409,
         "Password must be different from the current one"
