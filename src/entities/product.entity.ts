@@ -41,7 +41,7 @@ export class Product {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne((type) => Seller, (seller) => seller.products)
+  @ManyToOne(() => Seller, (seller) => seller.products)
   seller: Seller;
 
   @ManyToMany(() => Buys, {

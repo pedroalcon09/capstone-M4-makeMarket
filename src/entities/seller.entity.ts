@@ -38,10 +38,9 @@ export class Seller {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Product, (product) => product.seller, {
+  @OneToMany(() => Product, (products) => products.seller, {
     eager: true,
   })
-  @JoinColumn()
   products: Product[];
 
   @BeforeInsert()

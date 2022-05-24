@@ -19,7 +19,6 @@ export default class SellerController {
       const token = await sellerLoginService(sellerLogin);
 
       return res.status(201).json({
-        status: 201,
         message: "Logged in!",
         token,
       });
@@ -33,12 +32,11 @@ export default class SellerController {
     try {
       const { name, email, password } = req.body;
 
-      const seller = await createSellerService({ name, email, password });
+      const seller = await createSellerService(name, email, password);
 
       console.log(seller);
 
       return res.status(201).json({
-        status: 201,
         message: "Seller created!",
         seller: seller,
       });
@@ -54,7 +52,6 @@ export default class SellerController {
       const sellers = await listSellerService();
 
       return res.status(200).json({
-        status: 200,
         sellers: sellers,
       });
     } catch (err) {
@@ -69,7 +66,6 @@ export default class SellerController {
       const Seller = await listSellerByIdService(sellerID);
 
       return res.status(200).json({
-        status: 200,
         Sellers: Seller,
       });
     } catch (err) {
@@ -85,7 +81,6 @@ export default class SellerController {
       const updatedSeller = await updateSellerService(sellerID, req.body);
 
       return res.status(200).json({
-        status: 200,
         message: "Seller updated!",
         Seller: updatedSeller,
       });
@@ -102,7 +97,6 @@ export default class SellerController {
       const deleteSeller = await deleteSellerService(sellerID);
 
       res.status(200).json({
-        status: 200,
         message: "Seller deleted successfully",
       });
     } catch (err) {

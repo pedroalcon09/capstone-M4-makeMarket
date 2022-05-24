@@ -3,14 +3,18 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Seller } from "../../entities/seller.entity";
 
-async function createSellerService({ name, email, password }: ISellerCreate) {
+async function createSellerService(
+  name: string,
+  email: string,
+  password: string
+) {
   const sellerRepository = AppDataSource.getRepository(Seller);
 
-  const sellers = await sellerRepository.find();
+  const sellers = await sellerRepository.findOne({ where: { email: email } });
 
-  const emailRegistered = sellers.find((seller) => seller.email === email);
+  console.log(sellers, "SELLERS");
 
-  if (emailRegistered) {
+  if (sellers) {
     throw new AppError(409, "Email already registered");
   }
 
@@ -20,7 +24,10 @@ async function createSellerService({ name, email, password }: ISellerCreate) {
     password,
   });
 
+  console.log(newSeller, "ANTES");
   await sellerRepository.save(newSeller);
+
+  console.log(newSeller, "DEPOIS");
   return newSeller;
 }
 
