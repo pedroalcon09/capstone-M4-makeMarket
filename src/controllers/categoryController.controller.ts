@@ -59,13 +59,14 @@ export default class CategoryController {
 
   static async delete(req: Request, res: Response) {
     try {
-      const { categoryId } = req.body;
+      const { categoryId } = req.params;
 
       const deletedCategory = await deleteCategoryService(categoryId);
 
       return res.status(200).json({
         status: 200,
         message: "Category deleted!",
+        deleted: deletedCategory,
       });
     } catch (err) {
       if (err instanceof AppError) {
