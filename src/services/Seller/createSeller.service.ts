@@ -12,8 +12,6 @@ async function createSellerService(
 
   const sellers = await sellerRepository.findOne({ where: { email: email } });
 
-  console.log(sellers, "SELLERS");
-
   if (sellers) {
     throw new AppError(409, "Email already registered");
   }
@@ -22,6 +20,7 @@ async function createSellerService(
     name,
     email,
     password,
+    products: [],
   });
 
   console.log(newSeller, "ANTES");

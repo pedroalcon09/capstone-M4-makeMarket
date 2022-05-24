@@ -26,10 +26,10 @@ export class Seller {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   totalSales: number;
 
-  @Column()
+  @Column({ nullable: true })
   grade: number;
 
   @CreateDateColumn()
