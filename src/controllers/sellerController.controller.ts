@@ -32,7 +32,7 @@ export default class SellerController {
     try {
       const { name, email, password } = req.body;
 
-      const seller = await createSellerService(name, email, password);
+      const seller = await createSellerService({ name, email, password });
 
       console.log(seller);
 
@@ -63,10 +63,11 @@ export default class SellerController {
   static async listById(req: Request, res: Response) {
     try {
       const { sellerID } = req.params;
+
       const Seller = await listSellerByIdService(sellerID);
 
       return res.status(200).json({
-        Sellers: Seller,
+        sellers: Seller,
       });
     } catch (err) {
       if (err instanceof AppError) {

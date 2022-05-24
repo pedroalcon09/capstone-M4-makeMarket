@@ -3,11 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Seller } from "../../entities/seller.entity";
 
-async function createSellerService(
-  name: string,
-  email: string,
-  password: string
-) {
+async function createSellerService({ name, email, password }: ISellerCreate) {
   const sellerRepository = AppDataSource.getRepository(Seller);
 
   const sellers = await sellerRepository.findOne({ where: { email: email } });
@@ -23,10 +19,8 @@ async function createSellerService(
     products: [],
   });
 
-  console.log(newSeller, "ANTES");
   await sellerRepository.save(newSeller);
 
-  console.log(newSeller, "DEPOIS");
   return newSeller;
 }
 

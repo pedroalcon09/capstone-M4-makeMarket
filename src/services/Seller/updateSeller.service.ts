@@ -1,14 +1,14 @@
-import { AppDataSource } from '../../data-source';
-import { ISellerUpdate } from '../../interfaces';
-import bcrypt from 'bcrypt';
-import { AppError } from '../../errors/appError';
-import { Seller } from '../../entities/seller.entity';
+import { AppDataSource } from "../../data-source";
+import { ISellerUpdate } from "../../interfaces";
+import bcrypt from "bcrypt";
+import { AppError } from "../../errors/appError";
+import { Seller } from "../../entities/seller.entity";
 
 async function updateSellerService(id: string, updateData: ISellerUpdate) {
   const sellerRepository = AppDataSource.getRepository(Seller);
 
   if (updateData === undefined) {
-    throw new AppError(400, 'Body request empty');
+    throw new AppError(400, "Body request empty");
   }
 
   const sellers = await sellerRepository.find();
@@ -16,7 +16,7 @@ async function updateSellerService(id: string, updateData: ISellerUpdate) {
   const sellerUpdate = sellers.find((seller) => seller.id === id);
 
   if (!sellerUpdate) {
-    throw new AppError(404, 'No Seller with this id');
+    throw new AppError(404, "No Seller with this id");
   }
 
   const newPass = updateData.password;
@@ -25,7 +25,7 @@ async function updateSellerService(id: string, updateData: ISellerUpdate) {
     if (bcrypt.compareSync(newPass, sellerUpdate!.password)) {
       throw new AppError(
         409,
-        'Password must be different from the current one'
+        "Password must be different from the current one"
       );
     }
     const updated = { ...sellerUpdate, ...updateData };
@@ -36,8 +36,9 @@ async function updateSellerService(id: string, updateData: ISellerUpdate) {
       name: updated.name,
       email: updated.email,
       password: hashedPassword,
-      updated_at: new Date(),
     });
+
+    updated.password = hashedPassword;
 
     return updated;
   }
@@ -47,7 +48,6 @@ async function updateSellerService(id: string, updateData: ISellerUpdate) {
   await sellerRepository.update(updated!.id, {
     name: updated.name,
     email: updated.email,
-    updated_at: new Date(),
   });
 
   return updated;
