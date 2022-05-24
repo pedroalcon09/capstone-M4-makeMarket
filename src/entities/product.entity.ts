@@ -20,7 +20,7 @@ export class Product {
   @Column()
   name: string;
 
-  @Column()
+  @Column("float")
   price: number;
 
   @Column()
@@ -41,8 +41,8 @@ export class Product {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Seller, (seller) => seller.id)
-  seller_id: string;
+  @ManyToOne((type) => Seller, (seller) => seller.products)
+  seller: Seller;
 
   @ManyToMany(() => Buys, {
     eager: true,

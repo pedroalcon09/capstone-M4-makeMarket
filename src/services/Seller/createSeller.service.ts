@@ -2,7 +2,6 @@ import { ISellerCreate } from "../../interfaces";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Seller } from "../../entities/seller.entity";
-import bcrypt from "bcrypt";
 
 async function createSellerService({ name, email, password }: ISellerCreate) {
   const sellerRepository = AppDataSource.getRepository(Seller);
@@ -15,15 +14,14 @@ async function createSellerService({ name, email, password }: ISellerCreate) {
     throw new AppError(409, "Email already registered");
   }
 
-  const seller = new Seller();
-  seller.name = name;
-  seller.email = email;
-  seller.password = bcrypt.hashSync(password, 10);
+  const newSeller = sellerRepository.create({
+    name,
+    email,
+    password,
+  });
 
-  sellerRepository.create(seller);
-  await sellerRepository.save(seller);
-
-  return seller;
+  await sellerRepository.save(newSeller);
+  return newSeller;
 }
 
 export default createSellerService;

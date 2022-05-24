@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 
-import sellerLoginService from "../services/Seller/sellerLogin.services";
-import createSellerService from "../services/Seller/createSeller.services";
-import listSellerService from "../services/Seller/listSeller.services";
-import listSellerByIdService from "../services/Seller/listSellerById.services";
-import updateSellerService from "../services/Seller/updateSeller.services";
-import deleteSellerService from "../services/Seller/deleteSeller.services";
+import sellerLoginService from "../services/Seller/sellerLogin.service";
+import createSellerService from "../services/Seller/createSeller.service";
+import listSellerService from "../services/Seller/listSeller.service";
+import listSellerByIdService from "../services/Seller/listSellerById.service";
+import updateSellerService from "../services/Seller/updateSeller.service";
+import deleteSellerService from "../services/Seller/deleteSeller.service";
 import { ISellerLogin } from "../interfaces";
 
 export default class SellerController {
@@ -33,9 +33,7 @@ export default class SellerController {
     try {
       const { name, email, password } = req.body;
 
-      const newSeller = { name, email, password };
-
-      const seller = await createSellerService(newSeller);
+      const seller = await createSellerService({ name, email, password });
 
       return res.status(201).json({
         status: 201,

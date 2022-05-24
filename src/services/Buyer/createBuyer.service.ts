@@ -2,7 +2,6 @@ import { IBuyerCreate } from "../../interfaces/buyer.interfaces";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Buyer } from "../../entities/buyer.entity";
-import bcrypt from "bcrypt";
 
 async function createBuyerService({ name, email, password }: IBuyerCreate) {
   const buyerRepository = AppDataSource.getRepository(Buyer);

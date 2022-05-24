@@ -33,8 +33,6 @@ export default class BuyerController {
     try {
       const { name, email, password } = req.body;
 
-      const newBuyer = { name, email, password };
-
       const buyer = await createBuyerService({ name, email, password });
 
       return res.status(201).json({
