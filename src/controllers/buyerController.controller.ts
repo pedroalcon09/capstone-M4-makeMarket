@@ -7,6 +7,7 @@ import listBuyersService from "../services/Buyer/listBuyers.service";
 import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import updateBuyerService from "../services/Buyer/updateBuyer.service";
 import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
+import listFavoriteProductService from "../services/products/ListFavoritesProductsService";
 import { IBuyerLogin } from "../interfaces";
 
 export default class BuyerController {
@@ -104,6 +105,22 @@ export default class BuyerController {
       res.status(200).json({
         status: 200,
         message: "Buyer deleted successfully",
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async favoriteProduct(req: Request, res: Response) {
+    try {
+      const { buyerID } = req.params;
+
+      const favorite = await listFavoriteProductService(buyerID);
+      return res.status(200).json({
+        status: 200,
+        message: "Product favorite",
+        transaction: favorite,
       });
     } catch (err) {
       if (err instanceof AppError) {
