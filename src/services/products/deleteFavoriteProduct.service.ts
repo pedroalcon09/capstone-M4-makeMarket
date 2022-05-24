@@ -18,6 +18,8 @@ async function deleteFavoriteProduct(buyerID: string, productId: string) {
     throw new AppError(404, "No product with this id");
   }
 
-  await favoriteProduct.delete(favoriteProduct.id);
+  await favoriteRepository.delete(favoriteProduct!.id);
+
+  return favoriteProduct
 }
 export default deleteFavoriteProduct;
