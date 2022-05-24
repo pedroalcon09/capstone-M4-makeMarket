@@ -1,10 +1,8 @@
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
-import { Buyer } from "../../entities/buyer.entity";
-import { Product } from "../../entities/product.entity";
 import { Favorites } from "../../entities/favorites.entity";
 
-async function deleteFavoriteProduct(buyerID: string, productId: string) {
+async function createFavoriteProduct(buyerID: string, productId: string) {
   const favoriteRepository = AppDataSource.getRepository(Favorites);
 
   const favorite = await favoriteRepository.find();
@@ -18,6 +16,5 @@ async function deleteFavoriteProduct(buyerID: string, productId: string) {
     throw new AppError(404, "No product with this id");
   }
 
-  await favoriteProduct.delete(favoriteProduct.id);
 }
-export default deleteFavoriteProduct;
+export default createFavoriteProduct;
