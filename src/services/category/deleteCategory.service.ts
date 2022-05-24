@@ -1,16 +1,15 @@
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities/category.entity";
 
-
 const deleteCategoryService = async (categoryId: string) => {
-    const categoryRepository = AppDataSource.getRepository(Category)
-    const categories = await categoryRepository.find()
+  const categoryRepository = AppDataSource.getRepository(Category);
+  const categories = await categoryRepository.find();
 
-    const category = categories.find(category => category.id === categoryId)
+  const category = categories.find((category) => category.id === categoryId);
 
-    await categoryRepository.delete(category!.id)
+  await categoryRepository.delete(category!.id);
 
-    return true
-}
+  return true;
+};
 
-export default deleteCategoryService
+export default deleteCategoryService;
