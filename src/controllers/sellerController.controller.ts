@@ -35,6 +35,8 @@ export default class SellerController {
 
       const seller = await createSellerService({ name, email, password });
 
+      console.log(seller);
+
       return res.status(201).json({
         status: 201,
         message: "Seller created!",
