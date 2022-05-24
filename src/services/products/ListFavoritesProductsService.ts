@@ -11,7 +11,9 @@ async function listFavoriteProductService(buyerID: string) {
   const favorites = favorite.find((elem) => elem.id === buyerID);
   
   if (!favorites) {
-    throw new AppError(404, "No user with this id");
+    throw new AppError(404, "No favorite products found");
   }
+
+  return favorites
 }
 export default listFavoriteProductService;
