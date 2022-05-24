@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+} from "typeorm";
 import { Buyer } from "./buyer.entity";
 import { Product } from "./product.entity";
 import { v4 as uuid } from "uuid";
@@ -14,19 +21,19 @@ export class Buys {
   @Column()
   grade: number;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
   @Column()
   feedback: string;
 
-  @ManyToMany(() => Buyer)
+  /* @ManyToMany(() => Buyer)
   @JoinTable()
-  buyer: Buyer[];
+  buyer: Buyer[]; */
 
-  @ManyToMany(() => Product)
+  /* @ManyToMany(() => Product)
   @JoinTable()
-  product: Product[];
+  product: Product[]; */
 
   constructor() {
     if (!this.id) {

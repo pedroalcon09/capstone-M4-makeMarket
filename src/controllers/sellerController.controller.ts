@@ -1,22 +1,22 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 
-import buyerLoginService from "../services/Buyer/buyerLogin.service";
-import createBuyerService from "../services/Buyer/createBuyer.service";
-import listBuyersService from "../services/Buyer/listBuyers.service";
-import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
-import updateBuyerService from "../services/Buyer/updateBuyer.service";
-import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
-import { IBuyerLogin } from "../interfaces";
+import sellerLoginService from "../services/Seller/sellerLogin.services";
+import createSellerService from "../services/Seller/createSeller.services";
+import listSellerService from "../services/Seller/listSeller.services";
+import listSellerByIdService from "../services/Seller/listSellerById.services";
+import updateSellerService from "../services/Seller/updateSeller.services";
+import deleteSellerService from "../services/Seller/deleteSeller.services";
+import { ISellerLogin } from "../interfaces";
 
-export default class BuyerController {
+export default class SellerController {
   static async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
 
-      const buyerLogin: IBuyerLogin = { email, password };
+      const sellerLogin: ISellerLogin = { email, password };
 
-      const token = await buyerLoginService(buyerLogin);
+      const token = await sellerLoginService(sellerLogin);
 
       return res.status(201).json({
         status: 201,
@@ -33,14 +33,14 @@ export default class BuyerController {
     try {
       const { name, email, password } = req.body;
 
-      const newBuyer = { name, email, password };
+      const newSeller = { name, email, password };
 
-      const buyer = await createBuyerService({ name, email, password });
+      const seller = await createSellerService(newSeller);
 
       return res.status(201).json({
         status: 201,
-        message: "Buyer created!",
-        buyer: buyer,
+        message: "Seller created!",
+        seller: seller,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -51,11 +51,11 @@ export default class BuyerController {
 
   static async listAll(req: Request, res: Response) {
     try {
-      const buyers = await listBuyersService();
+      const sellers = await listSellerService();
 
       return res.status(200).json({
         status: 200,
-        buyers: buyers,
+        sellers: sellers,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -65,12 +65,12 @@ export default class BuyerController {
   }
   static async listById(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
-      const buyer = await listBuyerByIdService(buyerID);
+      const { sellerID } = req.params;
+      const Seller = await listSellerByIdService(sellerID);
 
       return res.status(200).json({
         status: 200,
-        buyers: buyer,
+        Sellers: Seller,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -80,14 +80,14 @@ export default class BuyerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { sellerID } = req.params;
 
-      const updatedBuyer = await updateBuyerService(buyerID, req.body);
+      const updatedSeller = await updateSellerService(sellerID, req.body);
 
       return res.status(200).json({
         status: 200,
-        message: "Buyer updated!",
-        buyer: updatedBuyer,
+        message: "Seller updated!",
+        Seller: updatedSeller,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -97,13 +97,13 @@ export default class BuyerController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { sellerID } = req.params;
 
-      const deleteBuyer = await deleteBuyerService(buyerID);
+      const deleteSeller = await deleteSellerService(sellerID);
 
       res.status(200).json({
         status: 200,
-        message: "Buyer deleted successfully",
+        message: "Seller deleted successfully",
       });
     } catch (err) {
       if (err instanceof AppError) {

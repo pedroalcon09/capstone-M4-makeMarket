@@ -1,6 +1,16 @@
-import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  ManyToMany,
+  JoinTable,
+  BeforeInsert,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Buys } from "./buys.entities";
 import { v4 as uuid } from "uuid";
+import * as bcrypt from "bcrypt";
 
 @Entity()
 export class Buyer {
@@ -16,15 +26,22 @@ export class Buyer {
   @Column()
   password: string;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToMany(() => Buys)
+  @ManyToMany(() => Buys, {
+    eager: true,
+  })
   @JoinTable()
   buys: Buys[];
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 10);
+  }
 
   constructor() {
     if (!this.id) {
