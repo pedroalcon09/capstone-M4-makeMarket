@@ -27,13 +27,13 @@ export class Buys {
   @Column()
   feedback: string;
 
-  /* @ManyToMany(() => Buyer)
+   @ManyToMany(() => Buyer)
   @JoinTable()
-  buyer: Buyer[]; */
+  buyer: Buyer[]; 
 
-  /* @ManyToMany(() => Product)
+   @ManyToMany(() => Product)
   @JoinTable()
-  product: Product[]; */
+  product: Product[]; 
 
   constructor() {
     if (!this.id) {
