@@ -1,6 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
-import { Buys } from "../../entities/buys.entity";
+import { Buys } from "../../entities/buys.entities";
 
 async function listBuyProductService(buyerID: string) {
   const purchasseRepository = AppDataSource.getRepository(Buys);

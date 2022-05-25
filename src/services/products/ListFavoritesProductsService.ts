@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Favorites } from "../../entities/favorites.entity";
 
-async function listFavoriteProductService(buyerID: string) {
+async function listFavoriteProductService(buyerID: string, productID: string) {
 
   const favoriteRepository = AppDataSource.getRepository(Favorites)
 

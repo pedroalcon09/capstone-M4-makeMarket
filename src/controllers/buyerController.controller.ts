@@ -8,6 +8,7 @@ import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import updateBuyerService from "../services/Buyer/updateBuyer.service";
 import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
 import listFavoriteProductService from "../services/products/ListFavoritesProductsService";
+import listBuyProductService from "../services/products/listBuyProduct.service";
 import { IBuyerLogin } from "../interfaces";
 
 export default class BuyerController {
@@ -114,9 +115,9 @@ export default class BuyerController {
   }
   static async favoriteProduct(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { buyerID, productID } = req.params;
 
-      const favorite = await listFavoriteProductService(buyerID);
+      const favorite = await listFavoriteProductService(buyerID, productID);
       return res.status(200).json({
         status: 200,
         message: "Product favorite",
