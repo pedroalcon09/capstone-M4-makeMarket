@@ -1,48 +1,53 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 
-import addFavoriteService from "../service/addFavorite.service"
-import removeFavoriteService from "../service/removeFavorite.service"
-import listFavoriteService from "../service/listFavorite.service"
+import createFavoriteService from "../services/favorites/createFavorite.service";
+import listFavoriteService from "../services/favorites/ListFavorites.service";
+import deleteFavoriteService from "../services/favorites/deleteFavorite.service";
 
-export default class favoriteController{
-    static async add(req:Request, res:Response){
-        try{
-            const { buyerID, productId } = req.params
+export default class favoriteController {
+  static async create(req: Request, res: Response) {
+    try {
+      const { buyerId, productId } = req.params;
 
-            const newFavorite = await addFavoriteService({buyerID, productId})
+      const newFavorite = await createFavoriteService(buyerId, productId);
 
-            return res.status(201).json({message: "Product added to favourites successfully"})
-        }catch(err){
-            if(err instanceof AppError){
-                handleError(err, res)
-            }
-        }
+      return res.status(201).json({
+        message: "Product added to favourites successfully",
+        newFavorite: newFavorite,
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
     }
-    static async remove(req:Request, res:Response){
-        try{
-            const { buyerID, productId } = req.params
+  }
+  static async delete(req: Request, res: Response) {
+    try {
+      const { buyerID, productId } = req.params;
 
-            const favoriteRemoved = await removeFavoriteService({buyerID, productId})
+      const favoriteRemoved = await deleteFavoriteService(buyerID, productId);
 
-            return res.status(200).json({message: "Product removed from favourites successfully"})
-        }catch(err){
-            if(err instanceof AppError){
-                handleError(err, res)
-            }
-        }
+      return res
+        .status(200)
+        .json({ message: "Product removed from favourites successfully" });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
     }
-    static async list(req:Request, res:Response){
-        try{
-            const { buyerID } = req.params
+  }
+  static async list(req: Request, res: Response) {
+    try {
+      const { buyerID } = req.params;
 
-            const listFavorite = await listFavoriteService({buyerID})
+      const listFavorite = await listFavoriteService(buyerID);
 
-            return res.status(200).json({favorites: listFavorite})
-        }catch(err){
-            if(err instanceof AppError){
-                handleError(err, res)
-            }
-        }
+      return res.status(200).json({ favorites: listFavorite });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
     }
+  }
 }
