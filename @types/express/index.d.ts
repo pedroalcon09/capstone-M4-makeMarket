@@ -1,11 +1,10 @@
-import * as express from "express"
-import { IBuysPay } from "../../src/interfaces/buys.interfaces"
+import * as express from "express";
+import { IBuysPay } from "../../src/interfaces/buys.interfaces";
 
-declare global{
-    namespace Express{
-        interface Request {
-            userId: string
-            newPayment: IBuysPay
-        }
+declare global {
+  namespace Express {
+    interface Request {
+      userId: string;
     }
+  }
 }
