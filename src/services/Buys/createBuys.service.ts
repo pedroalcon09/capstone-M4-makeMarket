@@ -18,6 +18,8 @@ async function createBuysProduct({ buyer_id, product_id }: IBuysCreate) {
   }
 
   const newFavoriteProduct = new Buys();
+  // newFavoriteProduct.buyer_id = buysUser;
+  // newFavoriteProduct.product_id = buysProduct;
 
   buyRepository.create(newFavoriteProduct);
   await buyRepository.save(newFavoriteProduct);
