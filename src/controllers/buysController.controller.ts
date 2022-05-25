@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { AppError, handleError } from "../errors/appError";
-import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
-import createBuysService from "../services/Buys/createBuys.service";
-import deleteBuysService from "../services/Buys/deleteBuys.service";
-import listBuysByBuyerId from "../services/Buys/listBuysByBuyerId.service";
-import updateBuyService from "../services/Buys/updateBuys.service";
+import { Request, Response } from 'express';
+import { AppError, handleError } from '../errors/appError';
+import listBuyerByIdService from '../services/Buyer/listBuyerById.service';
+import createBuysService from '../services/Buys/createBuys.service';
+import deleteBuysService from '../services/Buys/deleteBuys.service';
+import listBuysByBuyerId from '../services/Buys/listBuysByBuyerId.service';
+import updateBuyService from '../services/Buys/updateBuys.service';
 
 export default class BuysController {
   static async create(req: Request, res: Response) {
@@ -33,7 +33,7 @@ export default class BuysController {
       const buys = await listBuysByBuyerId(buyerId);
 
       return res.status(200).json({
-        message: "Buys found",
+        message: 'Buys found',
         buys: buys,
       });
     } catch (err) {
@@ -49,7 +49,7 @@ export default class BuysController {
       const deleteProduct = await deleteBuysService(buyId);
 
       res.status(200).json({
-        message: "Buy canceled successfully",
+        message: 'Buy canceled successfully',
         buy_canceled: deleteProduct,
       });
     } catch (err) {
@@ -65,8 +65,24 @@ export default class BuysController {
       const updatedBuy = await updateBuyService(buyerID, req.body);
 
       return res.status(200).json({
-        message: "Buy updated!",
+        message: 'Buy updated!',
         buyer: updatedBuy,
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async listById(req: Request, res: Response) {
+    try {
+      const { buyerID } = req.params;
+
+      const Buy = await updateBuyService(buyerID, req.body);
+
+      return res.status(200).json({
+        message: 'Buy updated!',
+        buys: Buy,
       });
     } catch (err) {
       if (err instanceof AppError) {
