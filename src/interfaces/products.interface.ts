@@ -21,6 +21,15 @@ export interface IProductsCreate {
   seller_id: string;
 }
 
+export interface IProductsCreateReq {
+  name: string;
+  price: number;
+  description: string;
+  stock: number;
+  url_img: string;
+  category_id: string;
+}
+
 export interface IProductsCreate {
   name: string;
   price: number;
@@ -31,8 +40,10 @@ export interface IProductsCreate {
 }
 
 export interface IProductsUpdate {
-  name: string;
-  price: number;
-  description: string;
-  stock: number;
+  name?: string;
+  price?: number;
+  description?: string;
+  stock?: number;
+  url_img?: string;
+  category_id?: string;
 }

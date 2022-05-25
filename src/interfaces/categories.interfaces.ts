@@ -7,3 +7,7 @@ export interface ICategories {
 export interface ICategoriesUpdate {
   name: string;
 }
+
+export interface ICategoryCreate {
+  name: string;
+}

@@ -37,8 +37,7 @@ export default class ProductsController {
       const products = await listProductsService();
 
       return res.status(200).json({
-        status: 200,
-        products: products,
+        products,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -50,13 +49,10 @@ export default class ProductsController {
     try {
       const { categoryId } = req.params;
 
-      const productsByCategory = await listProductsByCategoryService(
-        categoryId
-      );
+      const products = await listProductsByCategoryService(categoryId);
 
       return res.status(200).json({
-        status: 200,
-        products: productsByCategory,
+        products,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -66,14 +62,13 @@ export default class ProductsController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { product_id } = req.params;
+      const { productsId } = req.params;
 
-      const updatedProduct = await updateProductService(product_id, req.body);
+      const updatedProduct = await updateProductService(productsId, req.body);
 
       return res.status(200).json({
-        status: 200,
         message: "Product updated!",
-        buyer: updatedProduct,
+        product: updatedProduct,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -83,13 +78,13 @@ export default class ProductsController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { product_id } = req.params;
+      const { productsId } = req.params;
 
-      const deleteProduct = await deleteProductService(product_id);
+      const deleteProduct = await deleteProductService(productsId);
 
       res.status(200).json({
-        status: 200,
         message: "Product deleted successfully",
+        productDeleted: deleteProduct,
       });
     } catch (err) {
       if (err instanceof AppError) {

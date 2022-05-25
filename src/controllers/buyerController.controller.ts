@@ -35,8 +35,6 @@ export default class BuyerController {
     try {
       const { name, email, password } = req.body;
 
-      const newBuyer = { name, email, password };
-
       const buyer = await createBuyerService({ name, email, password });
 
       return res.status(201).json({
@@ -67,8 +65,8 @@ export default class BuyerController {
   }
   static async listById(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
-      const buyer = await listBuyerByIdService(buyerID);
+      const { buyerId } = req.params;
+      const buyer = await listBuyerByIdService(buyerId);
 
       return res.status(200).json({
         status: 200,
@@ -82,9 +80,9 @@ export default class BuyerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { buyerId } = req.params;
 
-      const updatedBuyer = await updateBuyerService(buyerID, req.body);
+      const updatedBuyer = await updateBuyerService(buyerId, req.body);
 
       return res.status(200).json({
         status: 200,
@@ -99,9 +97,9 @@ export default class BuyerController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { buyerId } = req.params;
 
-      const deleteBuyer = await deleteBuyerService(buyerID);
+      const deleteBuyer = await deleteBuyerService(buyerId);
 
       res.status(200).json({
         status: 200,

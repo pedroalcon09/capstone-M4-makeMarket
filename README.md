@@ -1289,7 +1289,6 @@ email - optional, email
 | CÓDIGO DO ERRO | DESCRIÇÃO                      |
 | -------------- | ------------------------------ |
 | 409            | "This category already exists" |
-| 403            | "Wrong or invalid token"       |
 
 #### LISTANDO CATEGORIAS
 
@@ -1331,10 +1330,9 @@ email - optional, email
 
 > Possiveis erros:
 
-| CÓDIGO DO ERRO | DESCRIÇÃO                |
-| -------------- | ------------------------ |
-| 404            | "No categories created"  |
-| 403            | "Wrong or invalid token" |
+| CÓDIGO DO ERRO | DESCRIÇÃO               |
+| -------------- | ----------------------- |
+| 404            | "No categories created" |
 
 #### ATUALIZANDO UMA CATEGORIAS
 
@@ -1377,7 +1375,6 @@ email - optional, email
 | CÓDIGO DO ERRO | DESCRIÇÃO                                      |
 | -------------- | ---------------------------------------------- |
 | 404            | "No categories created"                        |
-| 403            | "Wrong or invalid token"                       |
 | 403            | "Name must be different from the previous one" |
 
 #### DELETANDO NOVA CATEGORIA
@@ -1412,4 +1409,3 @@ email - optional, email
 | CÓDIGO DO ERRO | DESCRIÇÃO                  |
 | -------------- | -------------------------- |
 | 404            | "No category with this id" |
-| 403            | "Wrong or invalid token"   |

@@ -3,14 +3,14 @@ import {
   Column,
   PrimaryColumn,
   OneToMany,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  JoinColumn,
 } from "typeorm";
-import * as bcrypt from "bcrypt";
 import { Product } from "./product.entity";
 import { v4 as uuid } from "uuid";
+import * as bcrypt from "bcrypt";
 
 @Entity()
 export class Seller {
@@ -26,10 +26,10 @@ export class Seller {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   totalSales: number;
 
-  @Column()
+  @Column({ nullable: true })
   grade: number;
 
   @CreateDateColumn()
@@ -38,7 +38,9 @@ export class Seller {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Product, (product) => product.seller_id)
+  @OneToMany(() => Product, (products) => products.seller_id, {
+    eager: true,
+  })
   products: Product[];
 
   @BeforeInsert()

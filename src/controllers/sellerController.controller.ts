@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 
-import sellerLoginService from "../services/Seller/sellerLogin.services";
-import createSellerService from "../services/Seller/createSeller.services";
-import listSellerService from "../services/Seller/listSeller.services";
-import listSellerByIdService from "../services/Seller/listSellerById.services";
-import updateSellerService from "../services/Seller/updateSeller.services";
-import deleteSellerService from "../services/Seller/deleteSeller.services";
+import sellerLoginService from "../services/Seller/sellerLogin.service";
+import createSellerService from "../services/Seller/createSeller.service";
+import listSellerService from "../services/Seller/listSeller.service";
+import listSellerByIdService from "../services/Seller/listSellerById.service";
+import updateSellerService from "../services/Seller/updateSeller.service";
+import deleteSellerService from "../services/Seller/deleteSeller.service";
 import { ISellerLogin } from "../interfaces";
 
 export default class SellerController {
@@ -19,7 +19,6 @@ export default class SellerController {
       const token = await sellerLoginService(sellerLogin);
 
       return res.status(201).json({
-        status: 201,
         message: "Logged in!",
         token,
       });
@@ -33,12 +32,9 @@ export default class SellerController {
     try {
       const { name, email, password } = req.body;
 
-      const newSeller = { name, email, password };
-
-      const seller = await createSellerService(newSeller);
+      const seller = await createSellerService({ name, email, password });
 
       return res.status(201).json({
-        status: 201,
         message: "Seller created!",
         seller: seller,
       });
@@ -54,7 +50,6 @@ export default class SellerController {
       const sellers = await listSellerService();
 
       return res.status(200).json({
-        status: 200,
         sellers: sellers,
       });
     } catch (err) {
@@ -65,12 +60,12 @@ export default class SellerController {
   }
   static async listById(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
-      const Seller = await listSellerByIdService(sellerID);
+      const { sellerId } = req.params;
+
+      const Seller = await listSellerByIdService(sellerId);
 
       return res.status(200).json({
-        status: 200,
-        Sellers: Seller,
+        sellers: Seller,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -80,12 +75,11 @@ export default class SellerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
-      const updatedSeller = await updateSellerService(sellerID, req.body);
+      const updatedSeller = await updateSellerService(sellerId, req.body);
 
       return res.status(200).json({
-        status: 200,
         message: "Seller updated!",
         Seller: updatedSeller,
       });
@@ -97,12 +91,11 @@ export default class SellerController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
-      const deleteSeller = await deleteSellerService(sellerID);
+      const deleteSeller = await deleteSellerService(sellerId);
 
       res.status(200).json({
-        status: 200,
         message: "Seller deleted successfully",
       });
     } catch (err) {

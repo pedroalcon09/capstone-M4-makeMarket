@@ -3,3 +3,8 @@ export interface IFavourites {
   buyer_id: string;
   product_id: string;
 }
+
+export interface IFavouritesCreate {
+  buyer_id: string;
+  product_id: string;
+}

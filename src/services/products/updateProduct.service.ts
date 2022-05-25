@@ -24,10 +24,14 @@ const updateProductService = async (
     price: updateData.price,
     description: updateData.description,
     stock: updateData.stock,
-    updated_at: new Date(),
+    url_image: updateData.url_img,
   });
 
-  return true;
+  const updatedProduct = await productRepository.find({
+    where: { id: product_id },
+  });
+
+  return updatedProduct;
 };
 
 export default updateProductService;
