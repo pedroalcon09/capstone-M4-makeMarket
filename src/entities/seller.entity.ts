@@ -38,7 +38,7 @@ export class Seller {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Product, (products) => products.seller, {
+  @OneToMany(() => Product, (products) => products.seller_id, {
     eager: true,
   })
   products: Product[];

@@ -9,17 +9,17 @@ sellerRouter.post("/login", SellerController.login);
 sellerRouter.post("/", SellerController.create);
 sellerRouter.get("/", SellerController.listAll);
 sellerRouter.get(
-  "/:sellerID",
+  "/:sellerId",
   AuthCheckMiddleware.seller,
   SellerController.listById
 );
 sellerRouter.patch(
-  "/:sellerID",
+  "/:sellerId",
   AuthCheckMiddleware.seller,
   SellerController.update
 );
 sellerRouter.delete(
-  "/:sellerID",
+  "/:sellerId",
   AuthCheckMiddleware.seller,
   SellerController.delete
 );

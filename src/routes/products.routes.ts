@@ -4,10 +4,10 @@ import ProductsController from "../controllers/productsController.controller";
 
 const productsRoutes = Router();
 
-productsRoutes.post("/:sellerID", ProductsController.create);
+productsRoutes.post("/:sellerId", ProductsController.create);
 productsRoutes.get("/", ProductsController.listAll);
-productsRoutes.get("/:category", ProductsController.listByCategory);
-productsRoutes.patch("/:productsID", ProductsController.update);
-productsRoutes.delete("/:productsID", ProductsController.delete);
+productsRoutes.get("/:categoryId", ProductsController.listByCategory);
+productsRoutes.patch("/:productsId", ProductsController.update);
+productsRoutes.delete("/:productsId", ProductsController.delete);
 
 export default productsRoutes;

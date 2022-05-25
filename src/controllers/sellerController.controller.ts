@@ -62,9 +62,9 @@ export default class SellerController {
   }
   static async listById(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
-      const Seller = await listSellerByIdService(sellerID);
+      const Seller = await listSellerByIdService(sellerId);
 
       return res.status(200).json({
         sellers: Seller,
@@ -77,9 +77,9 @@ export default class SellerController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
-      const updatedSeller = await updateSellerService(sellerID, req.body);
+      const updatedSeller = await updateSellerService(sellerId, req.body);
 
       return res.status(200).json({
         message: "Seller updated!",
@@ -93,9 +93,9 @@ export default class SellerController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
-      const deleteSeller = await deleteSellerService(sellerID);
+      const deleteSeller = await deleteSellerService(sellerId);
 
       res.status(200).json({
         message: "Seller deleted successfully",

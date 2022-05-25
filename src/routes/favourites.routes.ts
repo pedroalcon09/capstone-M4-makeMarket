@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router } from "express";
 
 const favouritesRoutes = Router();
 
-favouritesRoutes.post('/:buyerID/:productID');
-favouritesRoutes.delete('/:buyerID/:productID');
-favouritesRoutes.get('/:buyerID');
+favouritesRoutes.post("/:buyerId/:productId");
+favouritesRoutes.delete("/:buyerId/:productId");
+favouritesRoutes.get("/:buyerId");
 
 export default favouritesRoutes;

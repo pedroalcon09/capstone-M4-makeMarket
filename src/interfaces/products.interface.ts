@@ -35,4 +35,5 @@ export interface IProductsUpdate {
   price: number;
   description: string;
   stock: number;
+  url_image: string;
 }

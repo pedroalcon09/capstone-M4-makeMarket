@@ -5,9 +5,7 @@ import { Product } from "../../entities/product.entity";
 const deleteProductService = async (id: string) => {
   const productRepository = AppDataSource.getRepository(Product);
 
-  const products = await productRepository.find();
-
-  const productDelete = products.find((product) => product.id === id);
+  const productDelete = await productRepository.findOne({ where: { id: id } });
 
   if (!productDelete) {
     throw new AppError(404, "No product with this id");
@@ -15,7 +13,7 @@ const deleteProductService = async (id: string) => {
 
   await productRepository.delete(productDelete!.id);
 
-  return true;
+  return productDelete;
 };
 
 export default deleteProductService;

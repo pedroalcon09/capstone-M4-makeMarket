@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router } from "express";
 
 const buysRoutes = Router();
 
-buysRoutes.post('/:buyerID/:productID');
-buysRoutes.delete('/:buyerID/pay');
-buysRoutes.get('/:buyID');
+buysRoutes.post("/:buyerId/:productID");
+buysRoutes.delete("/:buyerId/pay");
+buysRoutes.get("/:buyId");
 
 export default buysRoutes;

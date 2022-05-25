@@ -42,7 +42,7 @@ export class Product {
   updated_at: Date;
 
   @ManyToOne(() => Seller, (seller) => seller.products)
-  seller: Seller;
+  seller_id: string;
 
   @ManyToMany(() => Buys, {
     eager: true,

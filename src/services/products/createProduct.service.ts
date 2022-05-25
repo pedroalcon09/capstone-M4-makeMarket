@@ -16,11 +16,7 @@ const createProductService = async ({
   const productRepository = AppDataSource.getRepository(Product);
   const sellerRepository = AppDataSource.getRepository(Seller);
 
-  const sellers = await sellerRepository.find();
-
-  const seller = sellers.find((elem) => {
-    elem.id === seller_id;
-  });
+  const seller = await sellerRepository.findOne({ where: { id: seller_id } });
 
   const product = new Product();
   product.name = name;
@@ -31,7 +27,7 @@ const createProductService = async ({
   product.category_id = category_id;
 
   if (seller) {
-    product.seller = seller;
+    product.seller_id = seller.id;
   } else {
     throw new AppError(404, "No seller found with this id");
   }
