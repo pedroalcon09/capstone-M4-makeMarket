@@ -1,6 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
-import { Buys } from "../../entities/buys.entity";
+import { Buys } from "../../entities/buys.entities";
 import { IBuys } from "../../interfaces/buys.interfaces";
 
 async function createBuyProductService({ buyer_id, product_id }: IBuys) {
@@ -14,7 +14,7 @@ async function createBuyProductService({ buyer_id, product_id }: IBuys) {
     throw new AppError(404, "User not found");
   }
 
-  const purchasseProduct = purchasseRepository.find((elem) => elem.id === product_id);
+  const purchasseProduct = purchasseAwait.find((elem) => elem.id === product_id);
   if (!purchasseProduct) {
     throw new AppError(404, "No product with this id");
   }
