@@ -6,7 +6,7 @@ export default class AuthCheckMiddleware {
   static async seller(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.headers.authorization;
-      const { sellerID } = req.params;
+      const { sellerId } = req.params;
 
       jwt.verify(
         token as string,
@@ -15,7 +15,7 @@ export default class AuthCheckMiddleware {
           if (err) {
             throw new AppError(401, "Invalid token");
           }
-          if (decoded.id !== sellerID) {
+          if (decoded.id !== sellerId) {
             throw new AppError(401, "You can only access your profile");
           }
 

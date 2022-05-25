@@ -6,7 +6,7 @@ import { Seller } from "../../entities/seller.entity";
 async function createSellerService({ name, email, password }: ISellerCreate) {
   const sellerRepository = AppDataSource.getRepository(Seller);
 
-  const sellers = await sellerRepository.find();
+  const sellers = await sellerRepository.findOne({ where: { email: email } });
 
   if (sellers) {
     throw new AppError(409, "Email already registered");
