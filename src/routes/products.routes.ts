@@ -11,12 +11,14 @@ import {
   validateProductUpdate,
 } from "../Schemas/Product/validateProductUpdate.middleware";
 
+import { validateMiddleware } from "../middlewares/Validation.middleware";
+
 const productsRoutes = Router();
 
 productsRoutes.post(
   "/:sellerId",
   AuthCheckMiddleware.seller,
-  validateProductCreate(productCreateSchema),
+  validateMiddleware(productCreateSchema),
   ProductsController.create
 );
 productsRoutes.get("/", ProductsController.listAll);
@@ -24,7 +26,7 @@ productsRoutes.get("/:categoryId", ProductsController.listByCategory);
 productsRoutes.patch(
   "/:productsId",
   AuthCheckMiddleware.seller,
-  validateProductUpdate(productUpdateSchema),
+  validateMiddleware(productUpdateSchema),
   ProductsController.update
 );
 productsRoutes.delete(

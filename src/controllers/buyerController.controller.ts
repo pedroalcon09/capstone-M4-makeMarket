@@ -19,7 +19,6 @@ export default class BuyerController {
       const token = await buyerLoginService(buyerLogin);
 
       return res.status(201).json({
-        status: 201,
         message: "Logged in!",
         token,
       });
@@ -36,7 +35,6 @@ export default class BuyerController {
       const buyer = await createBuyerService({ name, email, password });
 
       return res.status(201).json({
-        status: 201,
         message: "Buyer created!",
         buyer: buyer,
       });
@@ -52,7 +50,6 @@ export default class BuyerController {
       const buyers = await listBuyersService();
 
       return res.status(200).json({
-        status: 200,
         buyers: buyers,
       });
     } catch (err) {
@@ -67,7 +64,6 @@ export default class BuyerController {
       const buyer = await listBuyerByIdService(buyerId);
 
       return res.status(200).json({
-        status: 200,
         buyers: buyer,
       });
     } catch (err) {
@@ -83,7 +79,6 @@ export default class BuyerController {
       const updatedBuyer = await updateBuyerService(buyerId, req.body);
 
       return res.status(200).json({
-        status: 200,
         message: "Buyer updated!",
         buyer: updatedBuyer,
       });
@@ -100,7 +95,6 @@ export default class BuyerController {
       const deleteBuyer = await deleteBuyerService(buyerId);
 
       res.status(200).json({
-        status: 200,
         message: "Buyer deleted successfully",
       });
     } catch (err) {
