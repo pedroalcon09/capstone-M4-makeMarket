@@ -4,15 +4,15 @@ import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
 import {
   buyerCreateSchema,
   validateBuyerCreate,
-} from "../middlewares/Buyer/validateBuyerCreate.middleware";
+} from "../Schemas/Buyer/validateBuyerCreate.middleware";
 import {
   buyerLoginSchema,
   validateBuyerLogin,
-} from "../middlewares/Buyer/validateBuyerLogin.middleware";
+} from "../Schemas/Buyer/validateBuyerLogin.middleware";
 import {
   buyerUpdateSchema,
   validateBuyerUpdate,
-} from "../middlewares/Buyer/validateBuyerUpdate.middleware";
+} from "../Schemas/Buyer/validateBuyerUpdate.middleware";
 
 const buyerRoutes = Router();
 
