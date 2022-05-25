@@ -8,6 +8,11 @@ export interface IBuys {
   feedback: string;
 }
 
+export interface IBuysCreate {
+  buyer_id: string;
+  product_id: string;
+}
+
 export interface IBuysPay {
   grade: number;
   feedback: string;
