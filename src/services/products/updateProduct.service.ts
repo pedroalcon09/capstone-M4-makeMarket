@@ -24,7 +24,7 @@ const updateProductService = async (
     price: updateData.price,
     description: updateData.description,
     stock: updateData.stock,
-    url_image: updateData.url_image,
+    url_image: updateData.url_img,
   });
 
   const updatedProduct = await productRepository.find({
