@@ -44,18 +44,22 @@ buyerRoutes.delete(
   BuyerController.delete
 ); // -- OK
 
+buyerRoutes.post(
+  "/:buyerId/favourite/:productId",
+  AuthCheckMiddleware.buyer,
+  BuyerController.addToFavourite
+);
+
+buyerRoutes.get(
+  "/:buyerId/favourite",
+  AuthCheckMiddleware.buyer,
+  BuyerController.listFavourite
+);
+
+buyerRoutes.delete(
+  "/:buyerId/favourite/:productId",
+  AuthCheckMiddleware.buyer,
+  BuyerController.removeFromFavourite
+);
+
 export default buyerRoutes;
-
-/* 
-import { Router } from "express";
-
-import favoriteController from "../controllers/favoriteController.controller";
-
-const favouritesRoutes = Router();
-
-favouritesRoutes.post("/:buyerId/:productId", favoriteController.create);
-favouritesRoutes.get("/:buyerId", favoriteController.list);
-favouritesRoutes.delete("/:buyerId/:productId", favoriteController.delete);
-
-export default favouritesRoutes;
- */
