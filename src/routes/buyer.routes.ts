@@ -43,7 +43,7 @@ buyerRoutes.delete(
   AuthCheckMiddleware.buyer,
   BuyerController.delete
 ); // -- OK
-
+/* 
 buyerRoutes.post(
   "/:buyerId/favourite/:productId",
   AuthCheckMiddleware.buyer,
@@ -61,5 +61,5 @@ buyerRoutes.delete(
   AuthCheckMiddleware.buyer,
   BuyerController.removeFromFavourite
 );
-
+ */
 export default buyerRoutes;

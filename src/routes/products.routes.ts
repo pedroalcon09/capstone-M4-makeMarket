@@ -5,11 +5,11 @@ import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
 import {
   productCreateSchema,
   validateProductCreate,
-} from "../middlewares/Product/validateProductCreate.middleware";
+} from "../Schemas/Product/validateProductCreate.middleware";
 import {
   productUpdateSchema,
   validateProductUpdate,
-} from "../middlewares/Product/validateProductUpdate.middleware";
+} from "../Schemas/Product/validateProductUpdate.middleware";
 
 const productsRoutes = Router();
 

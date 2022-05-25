@@ -6,7 +6,16 @@ export default class AuthCheckMiddleware {
   static async seller(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.headers.authorization;
+
+      if (!token) {
+        throw new AppError(401, "Token is needed");
+      }
+
       const { sellerId } = req.params;
+
+      if (!sellerId) {
+        throw new AppError(401, "Seller id is needed");
+      }
 
       jwt.verify(
         token as string,
@@ -31,7 +40,16 @@ export default class AuthCheckMiddleware {
   static async buyer(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.headers.authorization;
+
+      if (!token) {
+        throw new AppError(401, "Token is needed");
+      }
+
       const { buyerId } = req.params;
+
+      if (!buyerId) {
+        throw new AppError(401, "Buyer id is needed");
+      }
 
       jwt.verify(
         token as string,
