@@ -30,8 +30,8 @@ export default class BuysController {
       const deleteProduct = await deleteBuyerService(product_id);
 
       res.status(200).json({
-        status: 200,
         message: "Product deleted successfully",
+        product_deleted: deleteProduct,
       });
     } catch (err) {
       if (err instanceof AppError) {
@@ -46,7 +46,6 @@ export default class BuysController {
       const updatedBuy = await updateBuyService(buyerID, req.body);
 
       return res.status(200).json({
-        status: 200,
         message: "Buy updated!",
         buyer: updatedBuy,
       });

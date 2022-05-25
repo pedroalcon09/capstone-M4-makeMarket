@@ -16,7 +16,7 @@ async function deleteBuyerService(id: string) {
 
   await buyerRepository.delete(buyerDelete!.id);
 
-  return true;
+  return buyerDelete;
 }
 
 export default deleteBuyerService;

@@ -8,23 +8,20 @@ import { IBuysPay } from "../../interfaces";
 async function updateBuyService(id: string, updateData: IBuysPay) {
   const buyRepository = AppDataSource.getRepository(Buys);
 
-  const buy = await buyRepository.find();
-
-  const buyUpdate = buy.find((buyer) => buyer.id === id);
+  const buyUpdate = await buyRepository.findOne({ where: { id: id } });
 
   if (!buyUpdate) {
-    throw new AppError(404, "No user with this id");
+    throw new AppError(404, "No buy with this id");
   }
 
-    const updatedBuy = { ...buyUpdate, ...updateData };
+  const updatedBuy = { ...buyUpdate, ...updateData };
 
-    await buyRepository.update(updatedBuy!.id, {
+  await buyRepository.update(updatedBuy!.id, {
     grade: buyUpdate.grade,
-    feedback: buyUpdate.feedback
-    });
+    feedback: buyUpdate.feedback,
+  });
 
-    return updatedBuy;
+  return updatedBuy;
 }
-
 
 export default updateBuyService;

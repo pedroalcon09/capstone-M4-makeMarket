@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Buys } from "../../entities/buys.entities";
 import { Buyer } from "../../entities/buyer.entity";
-import { IBuysCreate } from "../../interfaces";
+import { IBuysCreate } from "../../interfaces/buys.interfaces";
 import { Product } from "../../entities/product.entity";
 
 async function createBuysProduct({ buyer_id, product_id }: IBuysCreate) {
@@ -23,11 +23,13 @@ async function createBuysProduct({ buyer_id, product_id }: IBuysCreate) {
   }
 
   const newBuy = new Buys();
-  newBuy.status = "ok";
+  newBuy.buyer_id = buyer_id;
+  newBuy.product_id = product_id;
 
-  buyRepository.create(newFavoriteProduct);
-  await buyRepository.save(newFavoriteProduct);
+  buyRepository.create(newBuy);
 
-  return newFavoriteProduct;
+  await buyRepository.save(newBuy);
+
+  return newBuy;
 }
 export default createBuysProduct;

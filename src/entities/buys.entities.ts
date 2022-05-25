@@ -15,25 +15,23 @@ export class Buys {
   @PrimaryColumn("uuid")
   readonly id: string;
 
-  @Column()
-  status: string;
+  @Column("boolean", { default: false })
+  paid: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   grade: number;
+
+  @Column({ nullable: true })
+  feedback: string;
 
   @CreateDateColumn()
   created_at: Date;
 
-  @Column()
-  feedback: string;
+  @ManyToMany(() => Buyer, (buyer) => buyer.id)
+  buyer_id: string;
 
-  @ManyToMany(() => Buyer)
-  @JoinTable()
-  buyer: Buyer[];
-
-  @ManyToMany(() => Product)
-  @JoinTable()
-  product: Product[];
+  @ManyToMany(() => Product, (product) => product.id)
+  product_id: string;
 
   constructor() {
     if (!this.id) {

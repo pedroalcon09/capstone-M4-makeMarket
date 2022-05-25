@@ -3,17 +3,15 @@ import { AppError } from "../../errors/appError";
 import { Buys } from "../../entities/buys.entities";
 
 const deleteBuysService = async (id: string) => {
-  const BuysRepository = AppDataSource.getRepository(Buys);
+  const buyRepository = AppDataSource.getRepository(Buys);
 
-  const Buy = await BuysRepository.find();
+  const buyDelete = await buyRepository.findOne({ where: { id: id } });
 
-  const buysDelete = Buy.find((product) => product.id === id);
-
-  if (!buysDelete) {
+  if (!buyDelete) {
     throw new AppError(404, "No product with this id");
   }
 
-  await BuysRepository.delete(buysDelete!.id);
+  await buyRepository.delete(buyDelete!.id);
 
   return true;
 };
