@@ -26,10 +26,10 @@ export class Seller {
   @Column()
   password: string;
 
-  @Column({ nullable: true })
+  @Column()
   totalSales: number;
 
-  @Column({ nullable: true })
+  @Column()
   grade: number;
 
   @CreateDateColumn()
@@ -38,9 +38,10 @@ export class Seller {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Product, (products) => products.seller_id, {
+  @OneToMany(() => Product, (product) => product.seller, {
     eager: true,
   })
+  @JoinColumn()
   products: Product[];
 
   @BeforeInsert()

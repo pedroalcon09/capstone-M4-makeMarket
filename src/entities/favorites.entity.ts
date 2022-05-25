@@ -8,17 +8,13 @@ export class Favorites {
   @PrimaryColumn("uuid")
   readonly id: string;
 
-  @ManyToMany(() => Buyer, {
-    eager: true,
-  })
+  @ManyToMany(() => Buyer)
   @JoinTable()
-  buyer_id: string;
+  buyer: Buyer[];
 
-  @ManyToMany(() => Product, {
-    eager: true,
-  })
+  @ManyToMany(() => Product)
   @JoinTable()
-  product_id: string;
+  product: Product[];
 
   constructor() {
     if (!this.id) {

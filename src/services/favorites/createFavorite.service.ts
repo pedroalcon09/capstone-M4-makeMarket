@@ -9,6 +9,7 @@ async function createFavoriteService(buyer_id: string, product_id: string) {
   const buyerRepository = AppDataSource.getRepository(Buyer);
 
   const buyer = await buyerRepository.find({ where: { id: buyer_id } });
+
   if (!buyer) {
     throw new AppError(404, "No buyer with this id");
   }
@@ -22,7 +23,7 @@ async function createFavoriteService(buyer_id: string, product_id: string) {
 
   const favoriteRepository = AppDataSource.getRepository(Favorites);
 
-  const favorite = await favoriteRepository.find({
+  const favorite = await favoriteRepository.findOne({
     where: { buyer_id: buyer_id, product_id: product_id },
   });
 
@@ -30,9 +31,11 @@ async function createFavoriteService(buyer_id: string, product_id: string) {
     throw new AppError(404, "This relation already exists");
   }
 
-  /* const newFavoriteProduct = new Favorites();
+  const newFavoriteProduct = new Favorites();
   newFavoriteProduct.buyer_id = buyer_id;
-  newFavoriteProduct.product_id = product_id; */
+  newFavoriteProduct.product_id = product_id;
+
+  console.log(newFavoriteProduct);
 
   const newFavourite = favoriteRepository.create({ buyer_id, product_id });
   console.log(newFavourite);

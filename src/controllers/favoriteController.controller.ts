@@ -10,6 +10,8 @@ export default class favoriteController {
     try {
       const { buyerId, productId } = req.params;
 
+      console.log(buyerId, productId);
+
       const newFavorite = await createFavoriteService(buyerId, productId);
 
       return res.status(201).json({
