@@ -5,7 +5,7 @@ import { AppError } from "../../errors/appError";
 import { Buys } from "../../entities/buys.entities";
 import { IBuysPay } from "../../interfaces";
 
-async function updateBuyerService(id: string, updateData: IBuysPay) {
+async function updateBuyService(id: string, updateData: IBuysPay) {
   const buyRepository = AppDataSource.getRepository(Buys);
 
   const buy = await buyRepository.find();
@@ -27,4 +27,4 @@ async function updateBuyerService(id: string, updateData: IBuysPay) {
 }
 
 
-export default updateBuyerService;
+export default updateBuyService;
