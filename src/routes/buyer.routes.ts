@@ -1,11 +1,31 @@
 import { Router } from "express";
 import BuyerController from "../controllers/buyerController.controller";
 import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
+import {
+  buyerCreateSchema,
+  validateBuyerCreate,
+} from "../middlewares/Buyer/validateBuyerCreate.middleware";
+import {
+  buyerLoginSchema,
+  validateBuyerLogin,
+} from "../middlewares/Buyer/validateBuyerLogin.middleware";
+import {
+  buyerUpdateSchema,
+  validateBuyerUpdate,
+} from "../middlewares/Buyer/validateBuyerUpdate.middleware";
 
 const buyerRoutes = Router();
 
-buyerRoutes.post("/", BuyerController.create); // -- OK
-buyerRoutes.post("/login", BuyerController.login); // -- OK
+buyerRoutes.post(
+  "/",
+  validateBuyerCreate(buyerCreateSchema),
+  BuyerController.create
+); // -- OK
+buyerRoutes.post(
+  "/login",
+  validateBuyerLogin(buyerLoginSchema),
+  BuyerController.login
+); // -- OK
 buyerRoutes.get("/", BuyerController.listAll); // -- OK
 buyerRoutes.get(
   "/:buyerId",
@@ -14,6 +34,7 @@ buyerRoutes.get(
 ); // -- OK
 buyerRoutes.patch(
   "/:buyerId",
+  validateBuyerUpdate(buyerUpdateSchema),
   AuthCheckMiddleware.buyer,
   BuyerController.update
 ); // -- OK

@@ -4,7 +4,7 @@ import CategoryController from "../controllers/categoryController.controller";
 import {
   validateCategory,
   createCategorySchema,
-} from "../middlewares/createCategory.middleware";
+} from "../middlewares/Category/createCategory.middleware";
 const categoriesRoutes = Router();
 
 categoriesRoutes.post(

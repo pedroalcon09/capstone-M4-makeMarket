@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ICategoryCreate } from "../interfaces";
+import { ICategoryCreate } from "../../interfaces";
 import * as yup from "yup";
 import { SchemaOf } from "yup";
 
