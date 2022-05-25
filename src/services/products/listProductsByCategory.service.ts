@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Product } from "../../entities/product.entity";
 
-const listProductsService = async (category_id: string) => {
+const listProductsByCategoryService = async (category_id: string) => {
   const productRepository = AppDataSource.getRepository(Product);
 
   const products = await productRepository.find({
@@ -16,4 +16,4 @@ const listProductsService = async (category_id: string) => {
   return products;
 };
 
-export default listProductsService;
+export default listProductsByCategoryService;
