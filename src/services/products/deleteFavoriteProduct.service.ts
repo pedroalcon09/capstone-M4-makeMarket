@@ -5,12 +5,8 @@ import { Product } from "../../entities/product.entity";
 import { Favorites } from "../../entities/favorites.entity";
 
 async function deleteFavoriteProduct(buyerID: string, productId: string) {
-  const buyerRepository = AppDataSource.getRepository(Buyer);
-  const productRepository = AppDataSource.getRepository(Product);
-  const favoriteRepository = AppDataSource.getRepository(Favorites)
+  const favoriteRepository = AppDataSource.getRepository(Favorites);
 
-  const buyers = await buyerRepository.find();
-  const products = await productRepository.find();
   const favorite = await favoriteRepository.find();
 
   const favoriteUser = favorite.find((elem) => elem.id === buyerID);
@@ -21,8 +17,7 @@ async function deleteFavoriteProduct(buyerID: string, productId: string) {
   if (!favoriteProduct) {
     throw new AppError(404, "No product with this id");
   }
-  
-  await favoriteProduct.delete(favoriteProduct.id);
 
+  await favoriteProduct.delete(favoriteProduct.id);
 }
-export default deleteFavoriteProduct
+export default deleteFavoriteProduct;
