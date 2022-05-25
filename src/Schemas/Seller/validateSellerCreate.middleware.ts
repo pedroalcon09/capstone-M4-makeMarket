@@ -17,7 +17,8 @@ export const sellerCreateSchema: SchemaOf<ISellerCreate> = yup.object().shape({
     ),
 });
 
-export const validateSellerCreate = (schema: SchemaOf<ISellerCreate>) => {
+export const validateSellerCreate =
+  (schema: SchemaOf<ISellerCreate>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
@@ -39,4 +40,3 @@ export const validateSellerCreate = (schema: SchemaOf<ISellerCreate>) => {
       next(err);
     }
   };
-};

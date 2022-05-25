@@ -8,7 +8,8 @@ export const sellerLoginSchema: SchemaOf<ISellerLogin> = yup.object().shape({
   password: yup.string().required("Password needed"),
 });
 
-export const validateSellerLogin = (schema: SchemaOf<ISellerLogin>) => {
+export const validateSellerLogin =
+  (schema: SchemaOf<ISellerLogin>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
@@ -30,4 +31,3 @@ export const validateSellerLogin = (schema: SchemaOf<ISellerLogin>) => {
       next(err);
     }
   };
-};
