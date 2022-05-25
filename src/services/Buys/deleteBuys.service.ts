@@ -11,9 +11,15 @@ const deleteBuysService = async (id: string) => {
     throw new AppError(404, "No product with this id");
   }
 
+  console.log(buyDelete, "PARA DELETAR");
+
+  if (buyDelete.paid) {
+    throw new AppError(403, "This buy has already been paid");
+  }
+
   await buyRepository.delete(buyDelete!.id);
 
-  return true;
+  return buyDelete;
 };
 
 export default deleteBuysService;

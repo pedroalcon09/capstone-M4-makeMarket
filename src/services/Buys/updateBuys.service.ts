@@ -17,6 +17,7 @@ async function updateBuyService(id: string, updateData: IBuysPay) {
   const updatedBuy = { ...buyUpdate, ...updateData };
 
   await buyRepository.update(updatedBuy!.id, {
+    paid: true,
     grade: buyUpdate.grade,
     feedback: buyUpdate.feedback,
   });

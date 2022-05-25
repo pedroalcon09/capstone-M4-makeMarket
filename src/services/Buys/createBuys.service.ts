@@ -5,7 +5,7 @@ import { Buyer } from "../../entities/buyer.entity";
 import { IBuysCreate } from "../../interfaces/buys.interfaces";
 import { Product } from "../../entities/product.entity";
 
-async function createBuysProduct({ buyer_id, product_id }: IBuysCreate) {
+async function createBuysService({ buyer_id, product_id }: IBuysCreate) {
   const buyRepository = AppDataSource.getRepository(Buys);
   const buyerRepository = AppDataSource.getRepository(Buyer);
   const productRepository = AppDataSource.getRepository(Product);
@@ -23,13 +23,17 @@ async function createBuysProduct({ buyer_id, product_id }: IBuysCreate) {
   }
 
   const newBuy = new Buys();
+  newBuy.paid = false;
   newBuy.buyer_id = buyer_id;
-  newBuy.product_id = product_id;
+  newBuy.product_id = product.id;
 
   buyRepository.create(newBuy);
+
+  buyer.buys.push(newBuy);
+  buyerRepository.save(buyer);
 
   await buyRepository.save(newBuy);
 
   return newBuy;
 }
-export default createBuysProduct;
+export default createBuysService;
