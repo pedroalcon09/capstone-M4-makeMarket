@@ -5,6 +5,7 @@ import listProductsService from "../services/products/listAllProducts.service";
 import listProductsByCategoryService from "../services/products/listProductsByCategory.service";
 import deleteProductService from "../services/products/deleteProduct.service";
 import updateProductService from "../services/products/updateProduct.service";
+import listBuyProductService from "../services/products/listBuyProduct.service";
 
 export default class ProductsController {
   static async create(req: Request, res: Response) {
@@ -89,6 +90,24 @@ export default class ProductsController {
       res.status(200).json({
         status: 200,
         message: "Product deleted successfully",
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async listPurchasse(req: Request, res: Response) {
+    try {
+      const { Id } = req.params;
+
+      const purchasseProduct = await listBuyProductService(
+        Id
+      );
+
+      return res.status(200).json({
+        status: 200,
+        products: purchasseProduct,
       });
     } catch (err) {
       if (err instanceof AppError) {
