@@ -7,6 +7,9 @@ import listBuyersService from "../services/Buyer/listBuyers.service";
 import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import updateBuyerService from "../services/Buyer/updateBuyer.service";
 import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
+import listFavoritesService from "../services/Buyer/listFavorite.service";
+import removedFromFavoriteService from "../services/Buyer/removeFavorite.service";
+import addToFavoriteService from "../services/Buyer/addFavorite.service";
 import { IBuyerLogin } from "../interfaces";
 
 export default class BuyerController {
@@ -109,4 +112,50 @@ export default class BuyerController {
       }
     }
   }
+  static async addToFavorite(req: Request, res: Response) {
+    try {
+      const { buyerId, productId } = req.params
+
+      const addedFavorite = addToFavoriteService(buyerId, productId)
+
+      res.status(201).json({
+        message: "Product added to favorites",
+        product: addedFavorite
+      })
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async removeFromFavorite(req: Request, res: Response) {
+    try {
+      const { buyerId, productId } = req.params
+
+      const removedFavorite = removedFromFavoriteService(buyerId, productId)
+
+      res.status(200).json({
+        message: "Product removed from favorites",
+        product_removed: removedFavorite
+      })
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async listFavorites(req: Request, res: Response) {
+    try {
+      const { buyerId } = req.params
+
+      const listFavorite = listFavoritesService(buyerId)
+
+      res.status(200).json(listFavorite)
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
 }
+
