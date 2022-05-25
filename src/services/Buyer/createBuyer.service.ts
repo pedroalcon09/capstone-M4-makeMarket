@@ -17,6 +17,7 @@ async function createBuyerService({ name, email, password }: IBuyerCreate) {
     name,
     email,
     password,
+    favourite_prod: [],
   });
 
   await buyerRepository.save(newBuyer);

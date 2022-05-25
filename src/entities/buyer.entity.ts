@@ -11,6 +11,7 @@ import {
 import { Buys } from "./buys.entities";
 import { v4 as uuid } from "uuid";
 import * as bcrypt from "bcrypt";
+import { Product } from "./product.entity";
 
 @Entity()
 export class Buyer {
@@ -31,6 +32,12 @@ export class Buyer {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToMany(() => Product, {
+    eager: true,
+  })
+  @JoinTable()
+  favourite_prod: Product[];
 
   @ManyToMany(() => Buys, {
     eager: true,

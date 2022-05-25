@@ -4,15 +4,15 @@ import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
 import {
   buyerCreateSchema,
   validateBuyerCreate,
-} from "../middlewares/Buyer/validateBuyerCreate.middleware";
+} from "../Schemas/Buyer/validateBuyerCreate.middleware";
 import {
   buyerLoginSchema,
   validateBuyerLogin,
-} from "../middlewares/Buyer/validateBuyerLogin.middleware";
+} from "../Schemas/Buyer/validateBuyerLogin.middleware";
 import {
   buyerUpdateSchema,
   validateBuyerUpdate,
-} from "../middlewares/Buyer/validateBuyerUpdate.middleware";
+} from "../Schemas/Buyer/validateBuyerUpdate.middleware";
 
 const buyerRoutes = Router();
 
@@ -43,5 +43,23 @@ buyerRoutes.delete(
   AuthCheckMiddleware.buyer,
   BuyerController.delete
 ); // -- OK
+/* 
+buyerRoutes.post(
+  "/:buyerId/favourite/:productId",
+  AuthCheckMiddleware.buyer,
+  BuyerController.addToFavourite
+);
 
+buyerRoutes.get(
+  "/:buyerId/favourite",
+  AuthCheckMiddleware.buyer,
+  BuyerController.listFavourite
+);
+
+buyerRoutes.delete(
+  "/:buyerId/favourite/:productId",
+  AuthCheckMiddleware.buyer,
+  BuyerController.removeFromFavourite
+);
+ */
 export default buyerRoutes;
