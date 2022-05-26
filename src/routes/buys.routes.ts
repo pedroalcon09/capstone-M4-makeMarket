@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import BuysController from "../controllers/buysController.controller";
+import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
 
 const buysRoutes = Router();
 
