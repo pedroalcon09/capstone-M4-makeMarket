@@ -1,15 +1,15 @@
 import { Router } from "express";
 
 import CategoryController from "../controllers/categoryController.controller";
-import {
-  validateCategory,
-  createCategorySchema,
-} from "../Schemas/Category/createCategory.middleware";
+import { createCategorySchema } from "../Schemas/Category/createCategory.middleware";
+
+import { validateMiddleware } from "../middlewares/Validation.middleware";
+
 const categoriesRoutes = Router();
 
 categoriesRoutes.post(
   "/new",
-  validateCategory(createCategorySchema),
+  validateMiddleware(createCategorySchema),
   CategoryController.create
 ); // -- OK
 categoriesRoutes.get("/", CategoryController.listAll); // -- OK

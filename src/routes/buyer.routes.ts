@@ -1,29 +1,22 @@
 import { Router } from "express";
 import BuyerController from "../controllers/buyerController.controller";
 import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
-import {
-  buyerCreateSchema,
-  validateBuyerCreate,
-} from "../Schemas/Buyer/validateBuyerCreate.middleware";
-import {
-  buyerLoginSchema,
-  validateBuyerLogin,
-} from "../Schemas/Buyer/validateBuyerLogin.middleware";
-import {
-  buyerUpdateSchema,
-  validateBuyerUpdate,
-} from "../Schemas/Buyer/validateBuyerUpdate.middleware";
+import { buyerCreateSchema } from "../Schemas/Buyer/validateBuyerCreate.middleware";
+import { buyerLoginSchema } from "../Schemas/Buyer/validateBuyerLogin.middleware";
+import { buyerUpdateSchema } from "../Schemas/Buyer/validateBuyerUpdate.middleware";
+
+import { validateMiddleware } from "../middlewares/Validation.middleware";
 
 const buyerRoutes = Router();
 
 buyerRoutes.post(
   "/",
-  validateBuyerCreate(buyerCreateSchema),
+  validateMiddleware(buyerCreateSchema),
   BuyerController.create
 ); // -- OK
 buyerRoutes.post(
   "/login",
-  validateBuyerLogin(buyerLoginSchema),
+  validateMiddleware(buyerLoginSchema),
   BuyerController.login
 ); // -- OK
 buyerRoutes.get("/", BuyerController.listAll); // -- OK
@@ -34,7 +27,7 @@ buyerRoutes.get(
 ); // -- OK
 buyerRoutes.patch(
   "/:buyerId",
-  validateBuyerUpdate(buyerUpdateSchema),
+  validateMiddleware(buyerUpdateSchema),
   AuthCheckMiddleware.buyer,
   BuyerController.update
 ); // -- OK

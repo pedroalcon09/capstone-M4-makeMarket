@@ -15,16 +15,18 @@ import {
   validateSellerLogin,
 } from "../Schemas/Seller/validateSellerLogin.middleware";
 
+import { validateMiddleware } from "../middlewares/Validation.middleware";
+
 const sellerRouter = Router();
 
 sellerRouter.post(
   "/login",
-  validateSellerLogin(sellerLoginSchema),
+  validateMiddleware(sellerLoginSchema),
   SellerController.login
 );
 sellerRouter.post(
   "/",
-  validateSellerCreate(sellerCreateSchema),
+  validateMiddleware(sellerCreateSchema),
   SellerController.create
 );
 sellerRouter.get("/", SellerController.listAll);
@@ -35,7 +37,7 @@ sellerRouter.get(
 );
 sellerRouter.patch(
   "/:sellerId",
-  validateSellerUpdate(sellerUpdateSchema),
+  validateMiddleware(sellerUpdateSchema),
   AuthCheckMiddleware.seller,
   SellerController.update
 );

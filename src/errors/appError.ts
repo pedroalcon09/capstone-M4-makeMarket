@@ -14,7 +14,6 @@ export function handleError(err: any, res: Response) {
   const { statusCode, message } = err;
 
   return res.status(statusCode).json({
-    status: "Error",
     statusCode,
     message,
   });
