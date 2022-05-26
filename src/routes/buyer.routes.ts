@@ -43,23 +43,23 @@ buyerRoutes.delete(
   AuthCheckMiddleware.buyer,
   BuyerController.delete
 ); // -- OK
-/* 
+
 buyerRoutes.post(
   "/:buyerId/favourite/:productId",
   AuthCheckMiddleware.buyer,
-  BuyerController.addToFavourite
+  BuyerController.addToFavorite
 );
 
 buyerRoutes.get(
   "/:buyerId/favourite",
   AuthCheckMiddleware.buyer,
-  BuyerController.listFavourite
+  BuyerController.listFavorites
 );
 
 buyerRoutes.delete(
   "/:buyerId/favourite/:productId",
   AuthCheckMiddleware.buyer,
-  BuyerController.removeFromFavourite
+  BuyerController.removeFromFavorite
 );
- */
+
 export default buyerRoutes;

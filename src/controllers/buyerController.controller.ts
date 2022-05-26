@@ -8,6 +8,10 @@ import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import updateBuyerService from "../services/Buyer/updateBuyer.service";
 import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
 import listBuyProductService from "../services/products/listBuyProduct.service";
+import listFavoritesService from "../services/Buyer/listFavorite.service";
+import removedFromFavoriteService from "../services/Buyer/removeFavorite.service";
+import addToFavoriteService from "../services/Buyer/addFavorite.service";
+
 import { IBuyerLogin } from "../interfaces";
 
 export default class BuyerController {
@@ -110,20 +114,53 @@ export default class BuyerController {
       }
     }
   }
-  // static async favoriteProduct(req: Request, res: Response) {
-  //   try {
-  //     const { buyerID, productID } = req.params;
 
-  //     const favorite = await listFavoriteProductService(buyerID, productID);
-  //     return res.status(200).json({
-  //       status: 200,
-  //       message: "Product favorite",
-  //       transaction: favorite,
-  //     });
-  //   } catch (err) {
-  //     if (err instanceof AppError) {
-  //       handleError(err, res);
-  //     }
-  //   }
-  // }
+  static async addToFavorite(req: Request, res: Response) {
+    try {
+      const { buyerId, productId } = req.params;
+
+      const addedFavorite = await addToFavoriteService(buyerId, productId);
+
+      res.status(201).json({
+        message: "Product added to favorites",
+        product: addedFavorite,
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async removeFromFavorite(req: Request, res: Response) {
+    try {
+      const { buyerId, productId } = req.params;
+
+      const removedFavorite = await removedFromFavoriteService(
+        buyerId,
+        productId
+      );
+
+      res.status(200).json({
+        message: "Product removed from favorites",
+        product_removed: removedFavorite,
+      });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
+  static async listFavorites(req: Request, res: Response) {
+    try {
+      const { buyerId } = req.params;
+
+      const listFavorite = await listFavoritesService(buyerId);
+
+      res.status(200).json(listFavorite);
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleError(err, res);
+      }
+    }
+  }
 }
