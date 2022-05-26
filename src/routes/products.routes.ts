@@ -2,14 +2,8 @@ import { Router } from "express";
 
 import ProductsController from "../controllers/productsController.controller";
 import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
-import {
-  productCreateSchema,
-  validateProductCreate,
-} from "../Schemas/Product/validateProductCreate.middleware";
-import {
-  productUpdateSchema,
-  validateProductUpdate,
-} from "../Schemas/Product/validateProductUpdate.middleware";
+import { productCreateSchema } from "../Schemas/Product/validateProductCreate.middleware";
+import { productUpdateSchema } from "../Schemas/Product/validateProductUpdate.middleware";
 
 import { validateMiddleware } from "../middlewares/Validation.middleware";
 

@@ -15,28 +15,3 @@ export const productCreateSchema: SchemaOf<IProductsCreateReq> = yup
     url_img: yup.string().required("Must have an image for display").url(),
     category_id: yup.string().required("Must have a category that fits"),
   });
-
-export const validateProductCreate =
-  (schema: SchemaOf<IProductsCreateReq>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validateData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-
-        req.body = validateData;
-
-        next();
-      } catch (err: any) {
-        const error = err.errors?.join(", ");
-
-        return res.status(400).json({ error });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

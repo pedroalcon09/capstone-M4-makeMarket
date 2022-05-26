@@ -8,27 +8,3 @@ export const createCategorySchema: SchemaOf<ICategoryCreate> = yup
   .shape({
     name: yup.string().required().min(5),
   });
-
-export const validateCategory =
-  (schema: SchemaOf<ICategoryCreate>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validatedData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-        req.body = validatedData;
-
-        next();
-      } catch (err: any) {
-        return res.status(400).json({
-          error: err.errors?.join(", "),
-        });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

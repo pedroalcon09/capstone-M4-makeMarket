@@ -11,28 +11,3 @@ export const buyerLoginSchema: SchemaOf<IBuyerLogin> = yup.object().shape({
   email: yup.string().email("Wrong email format").required("Email needed"),
   password: yup.string().required("Password needed"),
 });
-
-//Criar função pra fazer a validação
-export const validateBuyerLogin =
-  (schema: SchemaOf<IBuyerLogin>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validateData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-        req.body = validateData;
-
-        next();
-      } catch (err: any) {
-        const error = err.errors?.join(", ");
-
-        return res.status(400).json({ error });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

@@ -28,16 +28,12 @@ async function createBuysService({ buyer_id, product_id }: IBuysCreate) {
   newBuy.product_id = product.id;
 
   buyRepository.create(newBuy);
-
-  const newBuysArray = [...buyer.buys, newBuy];
-
-  console.log(newBuysArray);
-
-  buyerRepository.update(buyer!.id, {
-    buys: newBuysArray,
-  });
-
   await buyRepository.save(newBuy);
+
+  if (buyer && product) {
+    buyer.buys.push(newBuy);
+    await buyerRepository.save(buyer);
+  }
 
   return newBuy;
 }

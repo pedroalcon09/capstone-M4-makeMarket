@@ -15,28 +15,3 @@ export const productUpdateSchema: SchemaOf<IProductsUpdate> = yup
     url_img: yup.string().url(),
     category_id: yup.string(),
   });
-
-export const validateProductUpdate =
-  (schema: SchemaOf<IProductsUpdate>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validateData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-
-        req.body = validateData;
-
-        next();
-      } catch (err: any) {
-        const error = err.errors?.join(", ");
-
-        return res.status(400).json({ error });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

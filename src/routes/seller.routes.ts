@@ -2,18 +2,9 @@ import { Router } from "express";
 
 import SellerController from "../controllers/sellerController.controller";
 import AuthCheckMiddleware from "../middlewares/AuthCheck.middleware";
-import {
-  sellerUpdateSchema,
-  validateSellerUpdate,
-} from "../Schemas/Seller/updateSeller.middleware";
-import {
-  sellerCreateSchema,
-  validateSellerCreate,
-} from "../Schemas/Seller/validateSellerCreate.middleware";
-import {
-  sellerLoginSchema,
-  validateSellerLogin,
-} from "../Schemas/Seller/validateSellerLogin.middleware";
+import { sellerUpdateSchema } from "../Schemas/Seller/updateSeller.middleware";
+import { sellerCreateSchema } from "../Schemas/Seller/validateSellerCreate.middleware";
+import { sellerLoginSchema } from "../Schemas/Seller/validateSellerLogin.middleware";
 
 import { validateMiddleware } from "../middlewares/Validation.middleware";
 

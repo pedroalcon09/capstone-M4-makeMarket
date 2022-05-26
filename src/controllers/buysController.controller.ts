@@ -44,9 +44,9 @@ export default class BuysController {
   }
   static async delete(req: Request, res: Response) {
     try {
-      const { buyId } = req.params;
+      const { buyerId, buyId } = req.params;
 
-      const deleteProduct = await deleteBuysService(buyId);
+      const deleteProduct = await deleteBuysService(buyerId, buyId);
 
       res.status(200).json({
         message: "Buy canceled successfully",
@@ -60,13 +60,15 @@ export default class BuysController {
   }
   static async update(req: Request, res: Response) {
     try {
-      const { buyerID } = req.params;
+      const { buyerId, buyId } = req.params;
 
-      const updatedBuy = await updateBuyService(buyerID, req.body);
+      console.log(buyerId, "ID BUYER", buyId, "ID COMPRA");
+
+      const updatedBuy = await updateBuyService(buyerId, buyId, req.body);
 
       return res.status(200).json({
         message: "Buy updated!",
-        buyer: updatedBuy,
+        buy: updatedBuy,
       });
     } catch (err) {
       if (err instanceof AppError) {

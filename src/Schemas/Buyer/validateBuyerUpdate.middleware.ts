@@ -20,28 +20,3 @@ export const buyerUpdateSchema: SchemaOf<IBuyerUpdate> = yup.object().shape({
       "Password must be 6 char long, with number and special char(!,@,#,$,&,*)"
     ),
 });
-
-//Criar função pra fazer a validação
-export const validateBuyerUpdate =
-  (schema: SchemaOf<IBuyerUpdate>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validateData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-        req.body = validateData;
-
-        next();
-      } catch (err: any) {
-        const error = err.errors?.join(", ");
-
-        return res.status(400).json({ error });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

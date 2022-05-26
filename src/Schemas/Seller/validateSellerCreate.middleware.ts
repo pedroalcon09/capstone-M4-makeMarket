@@ -16,27 +16,3 @@ export const sellerCreateSchema: SchemaOf<ISellerCreate> = yup.object().shape({
       "Password must be 6 char long, with number and special char(!,@,#,$,&,*)"
     ),
 });
-
-export const validateSellerCreate =
-  (schema: SchemaOf<ISellerCreate>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body;
-
-      try {
-        const validateData = await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-        });
-        req.body = validateData;
-
-        next();
-      } catch (err: any) {
-        const error = err.errors?.join(", ");
-
-        return res.status(400).json({ error });
-      }
-    } catch (err) {
-      next(err);
-    }
-  };

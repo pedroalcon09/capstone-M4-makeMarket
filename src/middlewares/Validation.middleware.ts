@@ -12,6 +12,6 @@ export const validateMiddleware =
       await schema.validate(body, { abortEarly: false, stripUnknown: true });
       next();
     } catch (err: any) {
-      next(new AppError(400, err.message));
+      next(new AppError(400, err.errors.join(" / ")));
     }
   };
