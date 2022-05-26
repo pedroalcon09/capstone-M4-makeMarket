@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class remakeFavourites1653518572249 implements MigrationInterface {
-    name = 'remakeFavourites1653518572249'
+export class initialMigration1653571603847 implements MigrationInterface {
+    name = 'initialMigration1653571603847'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "buys" ("id" uuid NOT NULL, "status" character varying NOT NULL, "grade" integer NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "feedback" character varying NOT NULL, CONSTRAINT "PK_34ecbce508fa8a98d0f23d9372a" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "seller" ("id" uuid NOT NULL, "name" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "totalSales" integer, "grade" integer, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_36445a9c6e794945a4a4a8d3c9d" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "product" ("id" uuid NOT NULL, "name" character varying NOT NULL, "price" double precision NOT NULL, "description" character varying NOT NULL, "stock" integer NOT NULL, "url_image" character varying NOT NULL, "category_id" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "sellerIdId" uuid, CONSTRAINT "PK_bebc9158e480b949565b4dc7a82" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "buys" ("id" uuid NOT NULL, "paid" boolean NOT NULL DEFAULT false, "grade" integer, "feedback" character varying, "created_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_34ecbce508fa8a98d0f23d9372a" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "buyer" ("id" uuid NOT NULL, "name" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_0480fc3c7289846a31b8e1bc503" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "category" ("id" uuid NOT NULL, "name" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_9c4e4a89e3674fc9f382d733f03" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "product_buys_buys" ("productId" uuid NOT NULL, "buysId" uuid NOT NULL, CONSTRAINT "PK_ba9e358cfe3891ffdd88482f43c" PRIMARY KEY ("productId", "buysId"))`);
@@ -46,9 +46,9 @@ export class remakeFavourites1653518572249 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "product_buys_buys"`);
         await queryRunner.query(`DROP TABLE "category"`);
         await queryRunner.query(`DROP TABLE "buyer"`);
+        await queryRunner.query(`DROP TABLE "buys"`);
         await queryRunner.query(`DROP TABLE "product"`);
         await queryRunner.query(`DROP TABLE "seller"`);
-        await queryRunner.query(`DROP TABLE "buys"`);
     }
 
 }
