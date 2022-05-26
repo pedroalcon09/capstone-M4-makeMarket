@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
-import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import createBuysService from "../services/Buys/createBuys.service";
 import deleteBuysService from "../services/Buys/deleteBuys.service";
 import listBuysByBuyerId from "../services/Buys/listBuysByBuyerId.service";
@@ -17,6 +16,7 @@ export default class BuysController {
       });
 
       return res.status(201).json({
+        message: "Product bought successfully",
         newBuy,
       });
     } catch (err) {

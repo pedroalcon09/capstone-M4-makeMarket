@@ -7,13 +7,13 @@ async function listBuysByBuyerId(buyer_id: string) {
 
   const buys = await buysRepository.find();
 
-  const buyerBuys = buys.find((elem) => elem.buyer_id === buyer_id);
+  const buyerBuys = buys.filter((elem) => elem.buyer_id === buyer_id);
 
-  if (buys.length === 0) {
+  if (buyerBuys.length === 0) {
     throw new AppError(404, "No buys from this buyer to list");
   }
 
-  return buys;
+  return buyerBuys;
 }
 
 export default listBuysByBuyerId;
