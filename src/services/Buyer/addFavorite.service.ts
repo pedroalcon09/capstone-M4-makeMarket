@@ -13,8 +13,8 @@ async function addToFavoriteService( buyerId: string, productId: string ) {
 
     const productRepository = AppDataSource.getRepository(Product)
     const product = await productRepository.findOne({where:{id:productId}})
-
-    if(!buyer){
+    
+    if(!product){
         throw new AppError(403, "Product does not exist!")
     }
 
@@ -22,7 +22,7 @@ async function addToFavoriteService( buyerId: string, productId: string ) {
         buyer.favourite_prod.push(product)
         await buyerRepository.save(buyer)
     }
-
+    
     return product
 }
   
