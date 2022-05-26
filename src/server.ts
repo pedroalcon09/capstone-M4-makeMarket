@@ -7,7 +7,5 @@ const port = process.env.PORT || 3000;
     console.log("Error during data source initialization", err)
   );
 
-  app.listen(port, () => {
-    console.log("Server running", port);
-  });
+  app.listen(process.env.PORT || 3000);
 })();
