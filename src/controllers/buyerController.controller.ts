@@ -7,7 +7,6 @@ import listBuyersService from "../services/Buyer/listBuyers.service";
 import listBuyerByIdService from "../services/Buyer/listBuyerById.service";
 import updateBuyerService from "../services/Buyer/updateBuyer.service";
 import deleteBuyerService from "../services/Buyer/deleteBuyer.service";
-import listBuyProductService from "../services/products/listBuyProduct.service";
 import listFavoritesService from "../services/Buyer/listFavorite.service";
 import removedFromFavoriteService from "../services/Buyer/removeFavorite.service";
 import addToFavoriteService from "../services/Buyer/addFavorite.service";
